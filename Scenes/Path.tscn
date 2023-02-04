@@ -8,19 +8,19 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qytv6"]
 shader = ExtResource("1_2uv3i")
 shader_parameter/carrot_ridge_scale = 0.088
-shader_parameter/EdgeCrinkly = 0.93
+shader_parameter/EdgeCrinkly = 0.986
 shader_parameter/TexRidges = ExtResource("3_02cm7")
 shader_parameter/GradientMap = ExtResource("2_qs32o")
 
 [sub_resource type="Curve" id="Curve_qxnv8"]
-_data = [Vector2(0.607692, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.018018), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0.161079, 1), 0.0, 0.0, 0, 0, Vector2(0.648516, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.018018), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_wr6or"]
 
 [node name="s" type="Line2D"]
 material = SubResource("ShaderMaterial_qytv6")
-points = PackedVector2Array(0, 0, 100, 100, 198, 294, 400, 440, 663, 452, 903, 368, 1135, 295)
+points = PackedVector2Array(0, 0, 100, 100, 198, 294, 400, 440, 663, 452, 903, 368, 1139, 297)
 width = 100.0
 width_curve = SubResource("Curve_qxnv8")
 gradient = SubResource("Gradient_wr6or")

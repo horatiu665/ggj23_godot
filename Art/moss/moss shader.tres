@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://m50r2wdn2lgp"]
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://m50r2wdn2lgp"]
 
 [sub_resource type="VisualShaderNodeInput" id="9"]
 input_name = "texture"
@@ -17,6 +17,9 @@ parameter_name = "AlphaClip"
 default_value_enabled = true
 default_value = 0.9
 
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ygdhb"]
+source = 5
+
 [resource]
 code = "shader_type canvas_item;
 uniform sampler2D GradientMap;
@@ -30,6 +33,11 @@ void fragment() {
 	n_out3p0 = texture(TEXTURE, UV);
 
 
+	vec4 n_out7p0;
+// Texture2D:7
+	n_out7p0 = texture(GradientMap, vec2(n_out3p0.xy));
+
+
 // FloatParameter:6
 	float n_out6p0 = AlphaClip;
 
@@ -39,23 +47,26 @@ void fragment() {
 
 
 // Output:0
+	COLOR.rgb = vec3(n_out7p0.xyz);
 	COLOR.a = (n_out5p0 ? 1.0 : 0.0);
 
 
 }
 "
-graph_offset = Vector2(-396.992, 37.5903)
+graph_offset = Vector2(-222.167, -2.22417)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(520, 240)
+nodes/fragment/0/position = Vector2(720, 540)
 nodes/fragment/2/node = SubResource("9")
-nodes/fragment/2/position = Vector2(-1180, 280)
+nodes/fragment/2/position = Vector2(-1660, 660)
 nodes/fragment/3/node = SubResource("10")
-nodes/fragment/3/position = Vector2(-800, 200)
+nodes/fragment/3/position = Vector2(-1100, 520)
 nodes/fragment/4/node = SubResource("11")
-nodes/fragment/4/position = Vector2(-160, 200)
+nodes/fragment/4/position = Vector2(-1580, -100)
 nodes/fragment/5/node = SubResource("12")
-nodes/fragment/5/position = Vector2(-80, 680)
+nodes/fragment/5/position = Vector2(-80, 720)
 nodes/fragment/6/node = SubResource("13")
-nodes/fragment/6/position = Vector2(-720, 780)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 0, 0, 3, 0, 5, 0, 5, 0, 0, 1, 6, 0, 5, 1)
+nodes/fragment/6/position = Vector2(-840, 860)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture_ygdhb")
+nodes/fragment/7/position = Vector2(-700, 200)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 5, 0, 5, 0, 0, 1, 6, 0, 5, 1, 4, 0, 7, 2, 3, 0, 7, 0, 7, 0, 0, 0)

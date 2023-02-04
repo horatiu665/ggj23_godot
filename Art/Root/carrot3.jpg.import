@@ -3,26 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://r0bfy2eau7ys"
-path.etc2="res://.godot/imported/carrot3.jpg-85e0bc400b99b7f205c88acea63f292d.etc2.ctex"
+path="res://.godot/imported/carrot3.jpg-85e0bc400b99b7f205c88acea63f292d.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Art/Root/carrot3.jpg"
-dest_files=["res://.godot/imported/carrot3.jpg-85e0bc400b99b7f205c88acea63f292d.etc2.ctex"]
+dest_files=["res://.godot/imported/carrot3.jpg-85e0bc400b99b7f205c88acea63f292d.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
