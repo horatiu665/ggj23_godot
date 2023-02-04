@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://bp8psn6a8vclw"]
+
+[ext_resource type="Script" path="res://Scripts/seed.gd" id="1_gc6re"]
+[ext_resource type="PackedScene" uid="uid://bv4ljh8q4jgn4" path="res://Scenes/Rock.tscn" id="3_dmlv3"]
+[ext_resource type="PackedScene" uid="uid://ugxkgcg3s0u0" path="res://Scenes/Joint.tscn" id="3_ex0ir"]
+[ext_resource type="PackedScene" uid="uid://c458imdbcbtho" path="res://Scenes/Water.tscn" id="4_a25cb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pjg5b"]
+size = Vector3(1200, 1200, 10)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ueldc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mwpdo"]
+
+[node name="mainscene" type="Node2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(1363, 1179.5)
+scale = Vector2(2.32, 1.8325)
+mesh = SubResource("BoxMesh_pjg5b")
+texture = SubResource("PlaceholderTexture2D_ueldc")
+
+[node name="InputPath" type="Line2D" parent="."]
+material = SubResource("CanvasItemMaterial_mwpdo")
+points = PackedVector2Array(0, 0, 100, 100, 200, 300)
+joint_mode = 1
+
+[node name="Roots" type="Node2D" parent="." node_paths=PackedStringArray("inputPath", "startJoint", "waterLabel", "pickupsNode")]
+rotation = 0.00192257
+script = ExtResource("1_gc6re")
+inputPath = NodePath("../InputPath")
+growSpeed = 200.0
+jointDist = 200.0
+jointDropFraction = 1.1
+startJoint = NodePath("Joint")
+waterLabel = NodePath("WaterLabel")
+pickupsNode = NodePath("../Pickups")
+
+[node name="Joint" parent="Roots" instance=ExtResource("3_ex0ir")]
+position = Vector2(1238, 246)
+
+[node name="WaterLabel" type="RichTextLabel" parent="Roots"]
+offset_left = 15.0
+offset_top = -10.0
+offset_right = 498.0
+offset_bottom = 300.0
+theme_override_font_sizes/normal_font_size = 140
+text = "4351"
+context_menu_enabled = true
+
+[node name="ResetButton" type="Button" parent="Roots"]
+offset_left = 2474.09
+offset_top = 44.2435
+offset_right = 2625.09
+offset_bottom = 121.243
+theme_override_font_sizes/font_size = 50
+text = "RESET"
+
+[node name="Rocks" type="Node" parent="."]
+
+[node name="Rock" parent="Rocks" instance=ExtResource("3_dmlv3")]
+position = Vector2(267, 492)
+
+[node name="Rock2" parent="Rocks" instance=ExtResource("3_dmlv3")]
+position = Vector2(851, 806)
+
+[node name="Rock3" parent="Rocks" instance=ExtResource("3_dmlv3")]
+position = Vector2(714, 1201)
+
+[node name="Rock4" parent="Rocks" instance=ExtResource("3_dmlv3")]
+position = Vector2(1713, 956)
+
+[node name="Pickups" type="Node" parent="."]
+
+[node name="Water" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(1176, 1568)
+
+[node name="Water2" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(1432, 1304)
+
+[node name="Water3" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(1022, 1197)
+
+[node name="Water4" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(1204, 693)
+
+[connection signal="button_up" from="Roots/ResetButton" to="Roots" method="_on_reset_button_button_up"]

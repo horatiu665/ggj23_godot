@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://o52n5e3s8k81"]
+
+[ext_resource type="Script" path="res://FPSCounter/fps_counter.gd" id="1_rs1fc"]
+
+[node name="fps_counter" type="Node2D" node_paths=PackedStringArray("label")]
+position = Vector2(1030, 94)
+script = ExtResource("1_rs1fc")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+z_index = 4096
+offset_left = 11.0
+offset_top = 13.0
+offset_right = 51.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 35
+text = "34"

@@ -6,26 +6,25 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
-config/name="Ggj 23 Godot"
-run/main_scene="res://Art/Node2D FIRST SCENE.tscn"
-config/icon="res://icon.png"
+config/name="GGJ2023"
+run/main_scene="res://Scenes/mainscene.tscn"
+config/features=PackedStringArray("4.0", "Forward Plus")
+config/icon="res://icon.svg"
 
-[gui]
+[display]
 
-common/drop_mouse_on_gui_input_disabled=true
+window/size/viewport_width=2732
+window/size/viewport_height=2048
+window/stretch/mode="viewport"
 
-[mono]
+[input]
 
-project/assembly_name="Ggj 23 Godot"
-
-[physics]
-
-common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://Art/Root/default_env.tres"
+mouse_down={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+]
+}
