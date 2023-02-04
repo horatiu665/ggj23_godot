@@ -1,0 +1,84 @@
+[gd_resource type="VisualShader" load_steps=6 format=2]
+
+[sub_resource type="VisualShaderNodeInput" id=9]
+input_name = "texture"
+
+[sub_resource type="VisualShaderNodeTexture" id=10]
+source = 5
+
+[sub_resource type="VisualShaderNodeTextureUniform" id=11]
+uniform_name = "GradientMap"
+
+[sub_resource type="VisualShaderNodeCompare" id=12]
+function = 2
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=13]
+uniform_name = "AlphaClip"
+default_value_enabled = true
+default_value = 0.9
+
+[resource]
+code = "shader_type canvas_item;
+uniform sampler2D GradientMap;
+uniform float AlphaClip = 0.9;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:2
+
+// Texture:3
+	vec3 n_out3p0;
+	float n_out3p1;
+	{
+		vec4 TEXTURE_tex_read = texture(TEXTURE, UV.xy);
+		n_out3p0 = TEXTURE_tex_read.rgb;
+		n_out3p1 = TEXTURE_tex_read.a;
+	}
+
+// TextureUniform:4
+	vec3 n_out4p0;
+	float n_out4p1;
+	{
+		vec4 n_tex_read = texture(GradientMap, n_out3p0.xy);
+		n_out4p0 = n_tex_read.rgb;
+		n_out4p1 = n_tex_read.a;
+	}
+
+// ScalarUniform:6
+	float n_out6p0 = AlphaClip;
+
+// Compare:5
+	bool n_out5p0 = dot(n_out3p0, vec3(0.333333, 0.333333, 0.333333))>n_out6p0;
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+	COLOR.a = (n_out5p0 ? 1.0 : 0.0);
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -396.992, 37.5903 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 520, 240 )
+nodes/fragment/2/node = SubResource( 9 )
+nodes/fragment/2/position = Vector2( -1180, 280 )
+nodes/fragment/3/node = SubResource( 10 )
+nodes/fragment/3/position = Vector2( -800, 200 )
+nodes/fragment/4/node = SubResource( 11 )
+nodes/fragment/4/position = Vector2( -160, 200 )
+nodes/fragment/5/node = SubResource( 12 )
+nodes/fragment/5/position = Vector2( -80, 680 )
+nodes/fragment/6/node = SubResource( 13 )
+nodes/fragment/6/position = Vector2( -720, 780 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 3, 2, 3, 0, 4, 0, 4, 0, 0, 0, 3, 0, 5, 0, 5, 0, 0, 1, 6, 0, 5, 1 )

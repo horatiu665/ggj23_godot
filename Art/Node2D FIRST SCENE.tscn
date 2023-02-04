@@ -1,0 +1,120 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Art/moss/moss shader.tres" type="Shader" id=1]
+[ext_resource path="res://Art/moss/mossb1.png" type="Texture" id=2]
+[ext_resource path="res://Art/Root/carrot3.jpg" type="Texture" id=3]
+[ext_resource path="res://Art/Root/noise.png" type="Texture" id=4]
+[ext_resource path="res://Art/Root/root shader hhh.tres" type="Shader" id=5]
+[ext_resource path="res://Art/GROUND/ground shader.tres" type="Shader" id=6]
+[ext_resource path="res://Art/Root/root gradient.tres" type="Texture" id=7]
+[ext_resource path="res://Art/GROUND/grounddddd.png" type="Texture" id=8]
+[ext_resource path="res://Art/Root/hhhLine2D.gd" type="Script" id=9]
+[ext_resource path="res://Horatiu/MossSpawner.gd" type="Script" id=10]
+[ext_resource path="res://Art/GROUND/ground gradient2.tres" type="Texture" id=11]
+[ext_resource path="res://Art/moss/mossb3.png" type="Texture" id=12]
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 6 )
+shader_param/GradientMap = ExtResource( 11 )
+
+[sub_resource type="Gradient" id=17]
+offsets = PoolRealArray( 0.175947, 0.423163, 0.844098 )
+colors = PoolColorArray( 0.589844, 0.119715, 0.119715, 1, 0.173329, 0.268037, 0.414062, 1, 0.159496, 0.799708, 0.992653, 1 )
+
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 17 )
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 1 )
+shader_param/AlphaClip = 0.472
+shader_param/GradientMap = SubResource( 18 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 5 )
+shader_param/carrot_ridge_scale = 0.076
+shader_param/EdgeCrinkly = 0.962
+shader_param/TexRidges = ExtResource( 3 )
+shader_param/GradientMap = ExtResource( 7 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -1.96498, 0.0, 0, 0 ]
+
+[sub_resource type="VisualShader" id=19]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, async_visible;
+
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -396.992, 37.5903 )
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = SubResource( 19 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 15 )
+margin_left = -38.0
+margin_top = -58.0
+margin_right = 1129.0
+margin_bottom = 720.0
+texture = ExtResource( 8 )
+expand = true
+
+[node name="mossz" type="TextureRect" parent="."]
+material = SubResource( 16 )
+margin_left = 577.0
+margin_top = 229.0
+margin_right = 633.0
+margin_bottom = 281.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="mossz2" type="TextureRect" parent="."]
+material = SubResource( 16 )
+margin_left = 595.0
+margin_top = 240.0
+margin_right = 650.0
+margin_bottom = 292.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource( 5 )
+position = Vector2( -48, -7 )
+scale = Vector2( 0.324502, 0.420812 )
+points = PoolVector2Array( 890.718, 112.739, 992.29, 175.85, 1060.09, 287.539, 1066.25, 306.55, 1067.95, 324.236, 1069.63, 341.741, 1069.33, 358.83, 1072.41, 370.712, 1081.66, 392.099, 1087.82, 408.734, 1090.9, 422.992, 1102.18, 436.04, 1112.47, 453.884, 1127.88, 463.39, 1144.56, 474.767, 1161.78, 482.401, 1171.03, 496.659, 1189.52, 506.164, 1208, 518.046, 1229.58, 525.175, 1251.15, 525.175, 1334.35, 539.433, 1423.72, 572.702, 1445.29, 651.122, 1488.43, 724.789, 1577.8, 853.113, 1596.29, 974.307, 1624.03, 1033.72, 1608.62, 1090.75, 1559.31, 1178.67, 1488.43, 1181.05, 1352.84, 1162.04, 1340.52, 1124.02, 1322.03, 1050.35 )
+width = 80.0
+width_curve = SubResource( 6 )
+default_color = Color( 0.831373, 0.537255, 0.419608, 1 )
+texture = ExtResource( 4 )
+texture_mode = 1
+begin_cap_mode = 2
+script = ExtResource( 9 )
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+material = SubResource( 20 )
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+
+[node name="Node - Spawner" type="Node" parent="."]
+script = ExtResource( 10 )
