@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://jy7ksr2asypk"]
+
+[ext_resource type="Shader" uid="uid://m50r2wdn2lgp" path="res://Art/moss/moss shader.tres" id="1_7vkdq"]
+[ext_resource type="Texture2D" uid="uid://rkhlx0p17ulj" path="res://Art/moss/mossb1.png" id="2_hv2yf"]
+
+[sub_resource type="Gradient" id="17"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.386179, 0.52439, 0.605691, 0.691057, 0.770325)
+colors = PackedColorArray(0, 0, 0, 1, 0.335938, 0.190728, 0.15767, 1, 0.53125, 0.356153, 0.186443, 1, 0.793541, 0.502176, 0.219776, 1, 0.887291, 0.69739, 0.478349, 1)
+
+[sub_resource type="GradientTexture1D" id="18"]
+gradient = SubResource("17")
+
+[sub_resource type="ShaderMaterial" id="16"]
+shader = ExtResource("1_7vkdq")
+shader_parameter/AlphaClip = 0.346
+shader_parameter/GradientMap = SubResource("18")
+
+[node name="ROOT JOINT GRAPHICS" type="TextureRect"]
+material = SubResource("16")
+offset_left = 581.0
+offset_top = 301.0
+offset_right = 681.0
+offset_bottom = 418.0
+texture = ExtResource("2_hv2yf")
+stretch_mode = 6
