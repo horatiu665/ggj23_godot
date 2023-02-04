@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8tjyslme8fsp"
-path.etc2="res://.godot/imported/noise.png-32ba2071d16d0fc2f4d454b1ee647b3c.etc2.ctex"
+path="res://.godot/imported/noise.png-32ba2071d16d0fc2f4d454b1ee647b3c.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Art/Root/noise.png"
-dest_files=["res://.godot/imported/noise.png-32ba2071d16d0fc2f4d454b1ee647b3c.etc2.ctex"]
+dest_files=["res://.godot/imported/noise.png-32ba2071d16d0fc2f4d454b1ee647b3c.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

@@ -24,10 +24,10 @@ size = Vector3(1200, 1200, 10)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_ur6oc")
-offset_left = -195.0
-offset_top = -54.0
-offset_right = 3142.0
-offset_bottom = 2170.0
+offset_left = -2099.0
+offset_top = -1483.0
+offset_right = 5046.0
+offset_bottom = 3599.0
 texture = ExtResource("6_jpuuo")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]

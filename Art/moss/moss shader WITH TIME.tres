@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://m50r2wdn2lgp"]
+[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://cnlqckbhe6ek2"]
 
 [sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_2ti7k"]
 default_input_values = [0, 0.0, 1, 0.03, 2, 2.08165e-12]
@@ -9,7 +9,7 @@ default_input_values = [0, 0.0, 1, 0.03, 2, 2.08165e-12]
 input_name = "screen_uv"
 
 [sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_rlpg0"]
-default_input_values = [0, 0.0, 1, 2.08165e-12, 2, 0.0]
+default_input_values = [0, 0.0, 1, 14.235, 2, 0.0]
 
 [sub_resource type="VisualShaderNodeInput" id="9"]
 input_name = "texture"
@@ -50,9 +50,31 @@ void fragment() {
 	n_out3p0 = texture(TEXTURE, UV);
 
 
+// Input:12
+	vec2 n_out12p0 = SCREEN_UV;
+
+
+// Input:8
+	float n_out8p0 = TIME;
+
+
+// MultiplyAdd:14
+	float n_in14p1 = 14.23500;
+	float n_out14p0 = fma(n_out12p0.x, n_in14p1, n_out8p0);
+
+
+// FloatFunc:9
+	float n_out9p0 = sin(n_out14p0);
+
+
+// MultiplyAdd:10
+	float n_in10p1 = 0.03000;
+	float n_in10p2 = 0.00000;
+	float n_out10p0 = fma(n_out9p0, n_in10p1, n_in10p2);
+
+
 // VectorOp:11
-	vec3 n_in11p1 = vec3(0.00000, 0.00000, 0.00000);
-	vec3 n_out11p0 = vec3(n_out3p0.xyz) + n_in11p1;
+	vec3 n_out11p0 = vec3(n_out3p0.xyz) + vec3(n_out10p0);
 
 
 	vec4 n_out7p0;
@@ -75,7 +97,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-798.682, -53.0385)
+graph_offset = Vector2(-606.232, -79.8908)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(720, 540)
@@ -103,4 +125,4 @@ nodes/fragment/12/node = SubResource("VisualShaderNodeInput_gkhc6")
 nodes/fragment/12/position = Vector2(-3480, 220)
 nodes/fragment/14/node = SubResource("VisualShaderNodeMultiplyAdd_rlpg0")
 nodes/fragment/14/position = Vector2(-2820, 260)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 5, 0, 5, 0, 0, 1, 6, 0, 5, 1, 4, 0, 7, 2, 7, 0, 0, 0, 9, 0, 10, 0, 3, 0, 11, 0, 11, 0, 7, 0, 12, 0, 14, 0, 14, 0, 9, 0)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 5, 0, 5, 0, 0, 1, 6, 0, 5, 1, 4, 0, 7, 2, 7, 0, 0, 0, 9, 0, 10, 0, 3, 0, 11, 0, 10, 0, 11, 1, 11, 0, 7, 0, 12, 0, 14, 0, 8, 0, 14, 2, 14, 0, 9, 0)
