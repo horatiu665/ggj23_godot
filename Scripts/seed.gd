@@ -54,27 +54,51 @@ func _process(delta:float):
 	if mouseBtn && !drawingPath:
 		
 		# Find joint closts to mouse pos that is inside raidus (if any)
-		var joint:Joint
+		var joint:Joint = startJoint
+		var startPoint:Vector2
+		var startPointFound:bool
 		var minDist:float = 9999
-		for i in range(0,joints.size()):
+		for j in joints:
 			
-			var j = joints[i]
 			var dist = j.position.distance_to(mousePos)
-			if dist < j.radius && dist < minDist:
+			if dist < 50 && dist < minDist:
 				minDist = dist
+				startPointFound = true
+				startPoint = j.position
 				joint = j
 			
+			
+			for path in j.paths:
+				for p in path.points:
+					
+					dist = p.distance_to(mousePos)
+					if dist < 50 && dist < minDist:
+						minDist = dist
+						startPointFound = true
+						startPoint = p
+						joint = j
+			
 		
-		if joint != null:
+		if startPointFound:
+			
+			
+			joint = jointScene.instantiate()
+			add_child(joint)
+			joint.position = startPoint
+			joint.radius = 200
+			joints.append(joint)
+			
+			
+			
 			
 			drawingPath = true
 			inputPath.clear_points()
 			
 			inputPath.default_color = Color(1,1,1,1)
-			inputPath.add_point(mousePos)
+			inputPath.add_point(startPoint)
 			
 			growingRoot = create_path(joint)
-			growingRoot.add_point(mousePos) # two point so there is one for end
+			growingRoot.add_point(startPoint) # two point so there is one for end
 	
 			growingRootLenght = 0
 			growingSectionLength = 0
@@ -113,35 +137,7 @@ func _process(delta:float):
 					
 					pickup.queue_free()
 		
-		
-		
-	
-	
-#	for i in range(0,joints.size()):
-#		var shape_rid = PhysicsServer2D.circle_shape_create()
-#		var radius = 100
-#		PhysicsServer2D.shape_set_data(shape_rid, radius)
-#
-#		var params = PhysicsShapeQueryParameters2D.new()
-#		params.shape_rid = shape_rid
-#
-#		get_tree().root.find_child()
-#
-#		get_world_2d().direct_space_state.
-#		var result = get_world_2d().direct_space_state.collide_shape(params)
-#
-#		PhysicsServer2D.free_rid(shape_rid)
-#
-#		var query =	PhysicsShapeQueryParameters2D.new()
-#		query.shape = 
-#		var result = get_world_2d().direct_space_state.collide_shape(query)
-#
-#
-#		pass
-	
-	
-	
-	
+
 	waterLabel.text = str(water as int)
 	
 	
