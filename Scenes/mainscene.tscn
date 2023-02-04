@@ -1,9 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://bp8psn6a8vclw"]
+[gd_scene load_steps=12 format=3 uid="uid://bp8psn6a8vclw"]
 
 [ext_resource type="Script" path="res://Scripts/seed.gd" id="1_gc6re"]
 [ext_resource type="PackedScene" uid="uid://bv4ljh8q4jgn4" path="res://Scenes/Rock.tscn" id="3_dmlv3"]
 [ext_resource type="PackedScene" uid="uid://ugxkgcg3s0u0" path="res://Scenes/Joint.tscn" id="3_ex0ir"]
 [ext_resource type="PackedScene" uid="uid://c458imdbcbtho" path="res://Scenes/Water.tscn" id="4_a25cb"]
+[ext_resource type="Shader" uid="uid://cqx08qwusatfs" path="res://Art/GROUND/ground shader.tres" id="5_eyhnw"]
+[ext_resource type="Texture2D" uid="uid://df13l45dkifhh" path="res://Art/GROUND/grounddddd.png" id="6_jpuuo"]
+[ext_resource type="Texture2D" uid="uid://l5m6ye6m8evq" path="res://Art/GROUND/ground gradient2.tres" id="7_hsjui"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ur6oc"]
+shader = ExtResource("5_eyhnw")
+shader_parameter/Earthy = ExtResource("6_jpuuo")
+shader_parameter/GradientMap = ExtResource("7_hsjui")
 
 [sub_resource type="BoxMesh" id="BoxMesh_pjg5b"]
 size = Vector3(1200, 1200, 10)
@@ -14,7 +22,16 @@ size = Vector3(1200, 1200, 10)
 
 [node name="mainscene" type="Node2D"]
 
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ur6oc")
+offset_left = -195.0
+offset_top = -54.0
+offset_right = 3142.0
+offset_bottom = 2170.0
+texture = ExtResource("6_jpuuo")
+
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
 position = Vector2(1363, 1179.5)
 scale = Vector2(2.32, 1.8325)
 mesh = SubResource("BoxMesh_pjg5b")

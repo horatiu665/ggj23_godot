@@ -228,7 +228,7 @@ func create_path(joint:Joint) -> Path:
 		
 	add_child(path)
 	path.startJoint = joint
-	path.width = 20
+	# path.width = 20
 	
 	path.clear_points()
 	path.add_point(joint.position)

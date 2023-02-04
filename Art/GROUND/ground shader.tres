@@ -1,64 +1,51 @@
-[gd_resource type="VisualShader" load_steps=4 format=2]
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://cqx08qwusatfs"]
 
-[sub_resource type="VisualShaderNodeInput" id=9]
-input_name = "texture"
-
-[sub_resource type="VisualShaderNodeTexture" id=10]
+[sub_resource type="VisualShaderNodeTexture" id="10"]
 source = 5
 
-[sub_resource type="VisualShaderNodeTextureUniform" id=11]
-uniform_name = "GradientMap"
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="11"]
+parameter_name = "GradientMap"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_q17se"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_rr2r8"]
+parameter_name = "Earthy"
 
 [resource]
 code = "shader_type canvas_item;
+uniform sampler2D Earthy;
 uniform sampler2D GradientMap;
 
 
 
-void vertex() {
-// Output:0
-
-}
-
 void fragment() {
-// Input:2
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Earthy, UV);
 
-// Texture:3
-	vec3 n_out3p0;
-	float n_out3p1;
-	{
-		vec4 TEXTURE_tex_read = texture(TEXTURE, UV.xy);
-		n_out3p0 = TEXTURE_tex_read.rgb;
-		n_out3p1 = TEXTURE_tex_read.a;
-	}
 
-// TextureUniform:4
-	vec3 n_out4p0;
-	float n_out4p1;
-	{
-		vec4 n_tex_read = texture(GradientMap, n_out3p0.xy);
-		n_out4p0 = n_tex_read.rgb;
-		n_out4p1 = n_tex_read.a;
-	}
+	vec4 n_out5p0;
+// Texture2D:5
+	n_out5p0 = texture(GradientMap, vec2(n_out3p0.xy));
+
 
 // Output:0
-	COLOR.rgb = n_out4p0;
+	COLOR.rgb = vec3(n_out5p0.xyz);
 
-}
-
-void light() {
-// Output:0
 
 }
 "
-graph_offset = Vector2( -566.457, 71.7747 )
+graph_offset = Vector2(-262.534, -98.1124)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2( 460, 200 )
-nodes/fragment/2/node = SubResource( 9 )
-nodes/fragment/2/position = Vector2( -1180, 280 )
-nodes/fragment/3/node = SubResource( 10 )
-nodes/fragment/3/position = Vector2( -760, 180 )
-nodes/fragment/4/node = SubResource( 11 )
-nodes/fragment/4/position = Vector2( -160, 220 )
-nodes/fragment/connections = PoolIntArray( 2, 0, 3, 2, 3, 0, 4, 0, 4, 0, 0, 0 )
+nodes/fragment/0/position = Vector2(460, 200)
+nodes/fragment/3/node = SubResource("10")
+nodes/fragment/3/position = Vector2(-740, 220)
+nodes/fragment/4/node = SubResource("11")
+nodes/fragment/4/position = Vector2(-760, -440)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_q17se")
+nodes/fragment/5/position = Vector2(-100, 220)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_rr2r8")
+nodes/fragment/6/position = Vector2(-1540, -420)
+nodes/fragment/connections = PackedInt32Array(4, 0, 5, 2, 3, 0, 5, 0, 5, 0, 0, 0, 6, 0, 3, 2)

@@ -21,6 +21,10 @@ window/size/viewport_width=2732
 window/size/viewport_height=2048
 window/stretch/mode="viewport"
 
+[dotnet]
+
+project/assembly_name="GGJ2023"
+
 [input]
 
 mouse_down={
