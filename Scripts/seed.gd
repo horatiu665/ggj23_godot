@@ -117,7 +117,11 @@ func _process(delta:float):
 		inputPath.default_color = Color(1,1,1,alpha)
 	
 	
-	if growingRoot != null && !drawingPath && inputPath.points.size() > 1:
+	# Input path is only valid after a certain length
+	var inputPathValid = inputPath.points.size() > 1 && \
+		+ inputPath.points[0].distance_to(inputPath.points[inputPath.points.size()-1]) > 30
+	
+	if growingRoot != null && inputPathValid:
 		update_growing(delta)
 	
 	
