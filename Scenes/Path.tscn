@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl77pla1q3h74"]
+
+[ext_resource type="Script" path="res://Scripts/path.gd" id="1_aaqgv"]
+
+[sub_resource type="Curve" id="Curve_qxnv8"]
+_data = [Vector2(0.607692, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.018018), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Path" type="Line2D"]
+points = PackedVector2Array(0, 0, 100, 100, 200, 300, 400, 440, 663, 452, 903, 368, 1135, 295)
+width = 80.0
+width_curve = SubResource("Curve_qxnv8")
+script = ExtResource("1_aaqgv")

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv4ljh8q4jgn4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0p2f"]
+size = Vector2(200, 200)
+
+[sub_resource type="Gradient" id="Gradient_3clk5"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fsttp"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_65nhv"]
+width = 200
+height = 200
+color_ramp = SubResource("Gradient_3clk5")
+noise = SubResource("FastNoiseLite_fsttp")
+
+[node name="Rock" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_y0p2f")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = SubResource("NoiseTexture2D_65nhv")
