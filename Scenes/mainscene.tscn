@@ -73,6 +73,14 @@ offset_bottom = 121.243
 theme_override_font_sizes/font_size = 50
 text = "RESET"
 
+[node name="WaterCheat" type="Button" parent="Roots"]
+offset_left = 2472.27
+offset_top = 138.247
+offset_right = 2623.27
+offset_bottom = 215.247
+theme_override_font_sizes/font_size = 50
+text = "Water Cheat"
+
 [node name="Rocks" type="Node" parent="."]
 
 [node name="Rock" parent="Rocks" instance=ExtResource("3_dmlv3")]
@@ -102,3 +110,4 @@ position = Vector2(1022, 1197)
 position = Vector2(1204, 693)
 
 [connection signal="button_up" from="Roots/ResetButton" to="Roots" method="_on_reset_button_button_up"]
+[connection signal="button_up" from="Roots/WaterCheat" to="Roots" method="_on_water_cheat_button_up"]

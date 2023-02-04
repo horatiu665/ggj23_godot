@@ -43,8 +43,11 @@ func _ready():
 
 func _on_reset_button_button_up():
 	get_tree().reload_current_scene()
-	pass # Replace with function body.
+	
 
+
+func _on_water_cheat_button_up():
+	water += 1000
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta:float):
@@ -293,5 +296,7 @@ func _input(event):
 	
    # Print the size of the viewport.
 	#print("Viewport Resolution is: ", get_viewport_rect().size)
+
+
 
 
