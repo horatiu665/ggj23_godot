@@ -58,7 +58,7 @@ func _process(delta:float):
 	if mouseBtn && !drawingPath:
 		
 		# Find joint closts to mouse pos that is inside raidus (if any)
-		var joint:Joint = startJoint
+		var joint:Joint
 		var startPoint:Vector2
 		var startPointFound:bool
 		var minDist:float = 9999
@@ -80,19 +80,18 @@ func _process(delta:float):
 						minDist = dist
 						startPointFound = true
 						startPoint = p
-						joint = j
+						
 			
 		
 		if startPointFound:
 			
-			
-			joint = jointScene.instantiate()
-			add_child(joint)
-			joint.position = startPoint
-			joint.radius = 200
-			joints.append(joint)
-			
-			
+			# if not joint found craate one
+			if joint != startJoint:
+				joint = jointScene.instantiate()
+				add_child(joint)
+				joint.position = startPoint
+				joint.radius = 200
+				joints.append(joint)
 			
 			
 			drawingPath = true
@@ -119,7 +118,11 @@ func _process(delta:float):
 		inputPath.default_color = Color(1,1,1,alpha)
 	
 	
-	if growingRoot != null && !drawingPath && inputPath.points.size() > 1:
+	# Input path is only valid after a certain length
+	var inputPathValid = inputPath.points.size() > 1 && \
+		+ inputPath.points[0].distance_to(inputPath.points[inputPath.points.size()-1]) > 30
+	
+	if growingRoot != null && inputPathValid:
 		update_growing(delta)
 	
 	
@@ -147,13 +150,14 @@ func _process(delta:float):
 	
 func update_growing(delta:float):
 	var deltaLength = growSpeed*delta
-	growingRootLenght += deltaLength
 	
+	# cant grow without water
 	water -= deltaLength
 	if water < 0:
 		water = 0
-		growingRoot = null
 		return
+	
+	growingRootLenght += deltaLength
 	
 	
 	var result = find_last_index_before_distance(inputPath.points,growingRootLenght)
@@ -177,39 +181,41 @@ func update_growing(delta:float):
 		growingRoot = null
 		return
 
-	# Should we create new joint?
-	var newPoint = pos + v.normalized()*distLeft
-	jointDistAccumulator += deltaLength
 
-	if jointDistAccumulator > jointDist*jointDropFraction:
-		
-		var cutResult = find_last_index_before_distance(growingRoot.points,jointDist)
-		
-		# Create new joint
-		var joint = jointScene.instantiate()
-		add_child(joint)
-		joint.position = growingRoot.points[cutResult.index]
-		joint.radius = 200
-		joints.append(joint)
-		
-		
-		growingRoot.endJoint = joint
-		
-		
-		# Create new growing
-		var newPath = create_path(joint)
-		
+	var newPoint = pos + v.normalized()*distLeft
 	
-		for i in range(cutResult.index+1,growingRoot.points.size()):
-			newPath.add_point(growingRoot.points[i])
-		
-		growingRoot.points.resize(cutResult.index+1)
-		
-		growingRoot = newPath
-		
-		#growingRootLenght = 0
-		growingSectionLength = 0
-		jointDistAccumulator = jointDistAccumulator - jointDist
+#	# Should we create new joint?
+#	jointDistAccumulator += deltaLength
+#
+#	if jointDistAccumulator > jointDist*jointDropFraction:
+#
+#		var cutResult = find_last_index_before_distance(growingRoot.points,jointDist)
+#
+#		# Create new joint
+#		var joint = jointScene.instantiate()
+#		add_child(joint)
+#		joint.position = growingRoot.points[cutResult.index]
+#		joint.radius = 200
+#		joints.append(joint)
+#
+#
+#		growingRoot.endJoint = joint
+#
+#
+#		# Create new growing
+#		var newPath = create_path(joint)
+#
+#
+#		for i in range(cutResult.index+1,growingRoot.points.size()):
+#			newPath.add_point(growingRoot.points[i])
+#
+#		growingRoot.points.resize(cutResult.index+1)
+#
+#		growingRoot = newPath
+#
+#		#growingRootLenght = 0
+#		growingSectionLength = 0
+#		jointDistAccumulator = jointDistAccumulator - jointDist
 
 
 	# Detect next segment
