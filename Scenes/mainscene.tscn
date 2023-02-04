@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://71xx3l7iffqu"]
+[gd_scene load_steps=22 format=3 uid="uid://71xx3l7iffqu"]
 
 [ext_resource type="Script" path="res://Scripts/seed.gd" id="1_gc6re"]
 [ext_resource type="PackedScene" uid="uid://ugxkgcg3s0u0" path="res://Scenes/Joint.tscn" id="3_ex0ir"]
@@ -11,8 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://cdu85iemseh1q" path="res://Scenes/Rock2.tscn" id="8_tdb00"]
 [ext_resource type="PackedScene" uid="uid://dgsb6hqxilumm" path="res://Scenes/Rock4.tscn" id="9_8juut"]
 [ext_resource type="AudioStream" uid="uid://deq0g816byvpo" path="res://Audio/synthloop roota-trimmed.wav" id="11_4lhae"]
-[ext_resource type="AudioStream" uid="uid://btdg0q1p25ema" path="res://Audio/root_grow.wav" id="11_h5i72"]
+[ext_resource type="AudioStream" uid="uid://dr31k1gcte4lu" path="res://Audio/LOOP563571__cinetony__wind-in-forest-with-creaking-tree.wav" id="11_gbuyo"]
+[ext_resource type="AudioStream" uid="uid://dcvn8xml41uff" path="res://Audio/earth_grow_leather.wav" id="12_je7lv"]
 [ext_resource type="Script" path="res://Scripts/root_grow_sound.gd" id="13_lryvs"]
+[ext_resource type="AudioStream" uid="uid://kwr673b1txo6" path="res://Audio/chapter1.wav" id="13_np6gu"]
+[ext_resource type="AudioStream" uid="uid://dnimkwlvff6jl" path="res://Audio/chapter2.wav" id="14_llskd"]
+[ext_resource type="AudioStream" uid="uid://ddt2jmi35tuv7" path="res://Audio/chapter3.wav" id="15_ufn70"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ur6oc"]
 shader = ExtResource("5_eyhnw")
@@ -200,15 +204,35 @@ position = Vector2(858, 1439)
 [node name="AudioParent" type="Node" parent="."]
 
 [node name="BG AMBIENCE" type="AudioStreamPlayer2D" parent="AudioParent"]
+stream = ExtResource("11_gbuyo")
+volume_db = -5.302
+autoplay = true
+attenuation = 0.0
 
 [node name="BG MUSIC" type="AudioStreamPlayer2D" parent="AudioParent"]
 stream = ExtResource("11_4lhae")
 autoplay = true
+attenuation = 0.0
+
+[node name="WIN MUSIC1" type="AudioStreamPlayer2D" parent="AudioParent"]
+stream = ExtResource("13_np6gu")
+attenuation = 0.0
+
+[node name="WIN MUSIC2" type="AudioStreamPlayer2D" parent="AudioParent"]
+stream = ExtResource("14_llskd")
+attenuation = 0.0
+
+[node name="WIN MUSIC3" type="AudioStreamPlayer2D" parent="AudioParent"]
+stream = ExtResource("15_ufn70")
+attenuation = 0.0
 
 [node name="ROOT GROW" type="AudioStreamPlayer2D" parent="AudioParent"]
-stream = ExtResource("11_h5i72")
+stream = ExtResource("12_je7lv")
+volume_db = -80.0
+autoplay = true
 attenuation = 1e-05
 script = ExtResource("13_lryvs")
+max_volume = 1.0
 
 [connection signal="button_up" from="Roots/ResetButton" to="Roots" method="_on_reset_button_button_up"]
 [connection signal="button_up" from="Roots/WaterCheat" to="Roots" method="_on_water_cheat_button_up"]
