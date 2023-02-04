@@ -1,0 +1,117 @@
+[gd_scene load_steps=24 format=3 uid="uid://bbg78dbdyaxj4"]
+
+[ext_resource type="Shader" uid="uid://cqx08qwusatfs" path="res://Art/GROUND/ground shader.tres" id="1_fwgbb"]
+[ext_resource type="Texture2D" uid="uid://df13l45dkifhh" path="res://Art/GROUND/grounddddd.png" id="2_hg8mp"]
+[ext_resource type="Texture2D" uid="uid://l5m6ye6m8evq" path="res://Art/GROUND/ground gradient2.tres" id="3_fc0co"]
+[ext_resource type="Shader" uid="uid://m50r2wdn2lgp" path="res://Art/moss/moss shader.tres" id="4_oy31e"]
+[ext_resource type="Texture2D" uid="uid://d0lclhe8amkm1" path="res://Art/moss/mossb2.png" id="5_dsct7"]
+[ext_resource type="Texture2D" uid="uid://c13dnev7fgyu3" path="res://Art/moss/moss gradient stone.tres" id="5_rsam4"]
+[ext_resource type="Texture2D" uid="uid://bw3atheuvu7uj" path="res://Art/other stuff/rocko6.png" id="6_5euai"]
+[ext_resource type="Texture2D" uid="uid://rrx272cipol7" path="res://Art/moss/mossb4.png" id="7_m74q0"]
+[ext_resource type="Shader" uid="uid://4wags6gut1qh" path="res://Art/Root/root shader hhh.tres" id="8_qr118"]
+[ext_resource type="Texture2D" uid="uid://dbk772pmd1y6l" path="res://Art/Root/root gradient.tres" id="9_q5y6a"]
+[ext_resource type="Texture2D" uid="uid://r0bfy2eau7ys" path="res://Art/Root/carrot3.jpg" id="10_cjicq"]
+[ext_resource type="Texture2D" uid="uid://8tjyslme8fsp" path="res://Art/Root/noise.png" id="11_kwkye"]
+[ext_resource type="Script" path="res://Art/Root/hhhLine2D.gd" id="12_i7jtv"]
+[ext_resource type="Texture2D" uid="uid://rkhlx0p17ulj" path="res://Art/moss/mossb1.png" id="13_ii6vt"]
+[ext_resource type="Script" path="res://Horatiu/MossSpawner.gd" id="14_mhn4t"]
+[ext_resource type="PackedScene" uid="uid://cl77pla1q3h74" path="res://Scenes/Path.tscn" id="15_2i21q"]
+[ext_resource type="PackedScene" uid="uid://jy7ksr2asypk" path="res://Art/Root/root_joint_graphics.tscn" id="16_py3m8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iblmn"]
+shader = ExtResource("1_fwgbb")
+shader_parameter/Earthy = ExtResource("2_hg8mp")
+shader_parameter/GradientMap = ExtResource("3_fc0co")
+
+[sub_resource type="ShaderMaterial" id="16"]
+shader = ExtResource("4_oy31e")
+shader_parameter/AlphaClip = 0.002
+shader_parameter/GradientMap = ExtResource("5_rsam4")
+
+[sub_resource type="ShaderMaterial" id="5"]
+shader = ExtResource("8_qr118")
+shader_parameter/carrot_ridge_scale = 0.048
+shader_parameter/EdgeCrinkly = 0.962
+shader_parameter/TexRidges = ExtResource("10_cjicq")
+shader_parameter/GradientMap = ExtResource("9_q5y6a")
+
+[sub_resource type="Curve" id="6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.96498, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="VisualShader" id="19"]
+code = "shader_type spatial;
+
+
+"
+graph_offset = Vector2(-396.992, 37.5903)
+
+[sub_resource type="ShaderMaterial" id="20"]
+render_priority = 0
+shader = SubResource("19")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="background" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_iblmn")
+offset_left = 27.0
+offset_top = -21.0
+offset_right = 2027.0
+offset_bottom = 1312.0
+texture = ExtResource("2_hg8mp")
+
+[node name="mossz2" type="TextureRect" parent="."]
+material = SubResource("16")
+offset_left = 900.0
+offset_top = 325.0
+offset_right = 993.0
+offset_bottom = 454.0
+texture = ExtResource("5_dsct7")
+stretch_mode = 6
+
+[node name="mossz3" type="TextureRect" parent="."]
+material = SubResource("16")
+offset_left = 1108.0
+offset_top = 102.0
+offset_right = 1702.0
+offset_bottom = 624.0
+texture = ExtResource("6_5euai")
+stretch_mode = 6
+
+[node name="mossz4" type="TextureRect" parent="."]
+material = SubResource("16")
+offset_left = 799.0
+offset_top = 188.0
+offset_right = 892.0
+offset_bottom = 317.0
+texture = ExtResource("7_m74q0")
+stretch_mode = 6
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("5")
+position = Vector2(-48, -7)
+scale = Vector2(0.324502, 0.420812)
+points = PackedVector2Array(890.718, 112.739, 992.29, 175.85, 1060.09, 287.539, 1066.25, 306.55, 1067.95, 324.236, 1069.63, 341.741, 1069.33, 358.83, 1072.41, 370.712, 1081.66, 392.099, 1087.82, 408.734, 1090.9, 422.992, 1102.18, 436.04, 1112.47, 453.884, 1127.88, 463.39, 1144.56, 474.767, 1161.78, 482.401, 1171.03, 496.659, 1189.52, 506.164, 1208, 518.046, 1229.58, 525.175, 1251.15, 525.175, 1334.35, 539.433, 1423.72, 572.702, 1445.29, 651.122, 1488.43, 724.789, 1577.8, 853.113, 1596.29, 974.307, 1624.03, 1033.72, 1608.62, 1090.75, 1559.31, 1178.67, 1488.43, 1181.05, 1352.84, 1162.04, 1340.52, 1124.02, 1322.03, 1050.35)
+width = 80.0
+width_curve = SubResource("6")
+texture = ExtResource("11_kwkye")
+texture_mode = 1
+begin_cap_mode = 2
+script = ExtResource("12_i7jtv")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+material = SubResource("20")
+texture = ExtResource("13_ii6vt")
+
+[node name="Node - Spawner" type="Node" parent="."]
+script = ExtResource("14_mhn4t")
+mob_scene = null
+
+[node name="Timer" type="Timer" parent="Node - Spawner"]
+wait_time = 0.5
+autostart = true
+
+[node name="s" parent="." instance=ExtResource("15_2i21q")]
+position = Vector2(629, 355)
+
+[node name="ROOT JOINT GRAPHICS" parent="." instance=ExtResource("16_py3m8")]

@@ -11,6 +11,7 @@ extends Node2D
 @export var waterLabel:RichTextLabel
 @export var pickupsNode:Node
 
+
 var pathScene = load("res://Scenes/Path.tscn")
 var jointScene = load("res://Scenes/Joint.tscn")
 

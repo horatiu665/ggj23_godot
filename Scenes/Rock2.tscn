@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdu85iemseh1q"]
+
+[ext_resource type="Shader" uid="uid://m50r2wdn2lgp" path="res://Art/moss/moss shader.tres" id="1_a0ejo"]
+[ext_resource type="Texture2D" uid="uid://bw3atheuvu7uj" path="res://Art/other stuff/rocko6.png" id="2_tpm2p"]
+
+[sub_resource type="Gradient" id="Gradient_vabdr"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.337398, 0.506098, 0.648374, 0.845528)
+colors = PackedColorArray(0.205117, 0.205117, 0.205117, 1, 0.468736, 0.493543, 0.45345, 1, 0.648438, 0.648438, 0.648438, 1, 0.761168, 0.775703, 0.762859, 1, 0.89006, 0.897385, 0.890902, 1)
+
+[sub_resource type="GradientTexture1D" id="18"]
+gradient = SubResource("Gradient_vabdr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pv774"]
+shader = ExtResource("1_a0ejo")
+shader_parameter/AlphaClip = 0.002
+shader_parameter/GradientMap = SubResource("18")
+
+[node name="mossz3" type="TextureRect"]
+material = SubResource("ShaderMaterial_pv774")
+offset_left = 1380.0
+offset_top = 693.0
+offset_right = 1974.0
+offset_bottom = 1215.0
+texture = ExtResource("2_tpm2p")
+stretch_mode = 6
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(180, 6, -2, 187, 68, 535, 345, 529, 590, 225, 593, 125, 449, 2)
