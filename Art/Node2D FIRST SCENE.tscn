@@ -118,3 +118,11 @@ texture = ExtResource( 2 )
 
 [node name="Node - Spawner" type="Node" parent="."]
 script = ExtResource( 10 )
+mob_scene = null
+
+[node name="Timer" type="Timer" parent="Node - Spawner"]
+wait_time = 0.5
+autostart = true
+__meta__ = {
+"_editor_description_": ";lalalalla;"
+}
