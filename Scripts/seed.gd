@@ -1,5 +1,6 @@
 extends Node2D
 
+class_name Seed
 
 @export var inputPath:Line2D
 @export var growSpeed:float = 100
@@ -55,7 +56,7 @@ func _process(delta:float):
 	
 	var mouseBtn = Input.is_action_pressed("mouse_down");
 	
-	if mouseBtn && !drawingPath:
+	if mouseBtn && !drawingPath && water > 0:
 		
 		# Find joint closts to mouse pos that is inside raidus (if any)
 		var joint:Joint
@@ -85,6 +86,8 @@ func _process(delta:float):
 		
 		if startPointFound:
 			
+			
+			
 			# if not joint found craate one
 			if joint != startJoint:
 				joint = jointScene.instantiate()
@@ -93,6 +96,7 @@ func _process(delta:float):
 				joint.radius = 200
 				joints.append(joint)
 			
+			print("Starting growth from:",joint)
 			
 			drawingPath = true
 			inputPath.clear_points()
@@ -120,7 +124,9 @@ func _process(delta:float):
 	
 	# Input path is only valid after a certain length
 	var inputPathValid = inputPath.points.size() > 1 && \
-		+ inputPath.points[0].distance_to(inputPath.points[inputPath.points.size()-1]) > 30
+		+ inputPath.points[0].distance_to(inputPath.points[inputPath.points.size()-1]) > 100
+	
+	#print("inputPathValid:",inputPathValid, " drawing:", drawingPath, " growing:", growingRoot != null)
 	
 	if growingRoot != null && inputPathValid:
 		update_growing(delta)
@@ -136,13 +142,15 @@ func _process(delta:float):
 			var endPoint = path.points[path.points.size()-1]
 						
 			for child in pickupsNode.get_children():
+				
 				var pickup = child as Pickup
+				if pickup.isAbsorbing:
+					continue
+				
 				var dist = endPoint.distance_to(pickup.position)
-				if dist < 100:
+				if dist < pickup.pickupDist:
+					pickup.absorb(self,endPoint)
 					
-					water += pickup.water
-					
-					pickup.queue_free()
 		
 
 	waterLabel.text = str(water as int)
@@ -165,6 +173,7 @@ func update_growing(delta:float):
 	# Test from reaching end of input
 	if result.index == inputPath.points.size() -1:
 		growingRoot = null
+		print("REACED END!!!!!!")
 		return
 
 	var pos = inputPath.points[result.index]
@@ -179,6 +188,7 @@ func update_growing(delta:float):
 	var rayResult = get_world_2d().direct_space_state.intersect_ray(rayParam)
 	if rayResult.size() > 0:
 		growingRoot = null
+		print("Collision!!!")
 		return
 
 
@@ -223,7 +233,7 @@ func update_growing(delta:float):
 	if growingSectionLength > growSectionmaxLength:
 		growingSectionLength -= growSectionmaxLength
 
-		print("new point at length",growingRootLenght, " pos:", newPoint)
+	#	print("new point at length",growingRootLenght, " pos:", newPoint)
 		growingRoot.add_point(newPoint)
 	else:
 		growingRoot.set_point_position(growingRoot.points.size()-1, newPoint)
@@ -297,7 +307,7 @@ func _input(event):
 		
 		if drawingPath:
 			inputPath.add_point(mousePos)
-		print("Mouse Motion at: ", event.position)
+	#	print("Mouse Motion at: ", event.position)
 
 
 	

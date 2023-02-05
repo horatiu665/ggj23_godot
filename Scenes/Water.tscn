@@ -1,18 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://c458imdbcbtho"]
+[gd_scene load_steps=7 format=3 uid="uid://c458imdbcbtho"]
 
 [ext_resource type="Script" path="res://Scripts/Pickup.gd" id="1_nofml"]
 [ext_resource type="Shader" uid="uid://cnlqckbhe6ek2" path="res://Art/moss/moss shader WITH TIME.tres" id="2_58pbt"]
 [ext_resource type="Texture2D" uid="uid://bbsx2tnuguivp" path="res://Art/moss/moss gradient water.tres" id="3_fc4yg"]
 [ext_resource type="Texture2D" uid="uid://d0lclhe8amkm1" path="res://Art/moss/mossb2.png" id="4_c53k2"]
 
+[sub_resource type="Curve" id="Curve_vmfau"]
+_data = [Vector2(0, 0), 0.0, 1.37485, 0, 0, Vector2(0.123077, 0.635135), 1.85172, 1.85172, 0, 0, Vector2(1, 1), 0.305523, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qutnq"]
 shader = ExtResource("2_58pbt")
 shader_parameter/AlphaClip = 0.29
 shader_parameter/GradientMap = ExtResource("3_fc4yg")
 
-[node name="Water" type="Node2D"]
+[node name="Water" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_nofml")
-water = 500.0
+startWater = 300.0
+spriteSizeFactor = 0.02
+sprite = NodePath("Icon")
+sizeCurve = SubResource("Curve_vmfau")
 
 [node name="Icon" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qutnq")
