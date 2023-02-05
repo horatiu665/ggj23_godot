@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cpoqg5x1nkdr8"]
+[gd_scene load_steps=26 format=3 uid="uid://cpoqg5x1nkdr8"]
 
 [ext_resource type="Script" path="res://Scripts/seed.gd" id="1_gc6re"]
 [ext_resource type="PackedScene" uid="uid://c458imdbcbtho" path="res://Scenes/Water.tscn" id="4_a25cb"]
@@ -20,8 +20,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/Seed.tscn" id="18_0v7yh"]
 [ext_resource type="PackedScene" uid="uid://bhf50s12lpqxn" path="res://Scenes/Plant.tscn" id="18_rww4f"]
 [ext_resource type="Material" uid="uid://dfymclah4c56k" path="res://Art/water meter/water meter_material.tres" id="19_ahjug"]
-[ext_resource type="Shader" uid="uid://do0qggnd5snjb" path="res://Art/handicon_shader.tres" id="21_16ha7"]
-[ext_resource type="Texture2D" uid="uid://ibjdnxjx6p07" path="res://Art/handicon.png" id="22_qn4rn"]
+[ext_resource type="PackedScene" uid="uid://0qbftvd047n1" path="res://Art/hand_tutorial_anim_bla.tscn" id="21_t6ugd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ur6oc"]
 shader = ExtResource("5_eyhnw")
@@ -34,70 +33,6 @@ size = Vector3(1200, 1200, 10)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ueldc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mwpdo"]
-
-[sub_resource type="Animation" id="Animation_gvmie"]
-resource_name = "tutorial"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hand Tutorial Anim/Handicon:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1389, 558), Vector2(1402, 644)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hand Tutorial Anim/Handicon:material:shader_parameter/ColorParameter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_jxseq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hand Tutorial Anim/Handicon:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1389, 558)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hand Tutorial Anim/Handicon:material:shader_parameter/ColorParameter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7h3f7"]
-_data = {
-"RESET": SubResource("Animation_jxseq"),
-"tutorial": SubResource("Animation_gvmie")
-}
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_21fot"]
-shader = ExtResource("21_16ha7")
-shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
 [node name="mainscene" type="Node2D"]
 
@@ -312,17 +247,7 @@ max_volume = 1.0
 [node name="Plant" parent="." instance=ExtResource("18_rww4f")]
 position = Vector2(1330, 403)
 
-[node name="Hand Tutorial Anim" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_7h3f7")
-}
-
-[node name="Handicon" type="Sprite2D" parent="Hand Tutorial Anim"]
-material = SubResource("ShaderMaterial_21fot")
-position = Vector2(1389, 558)
-rotation = -2.15263
-scale = Vector2(0.41975, 0.351871)
-texture = ExtResource("22_qn4rn")
+[node name="Hand Tutorial Anim" parent="." instance=ExtResource("21_t6ugd")]
 
 [connection signal="button_up" from="Roots/ResetButton" to="Roots" method="_on_reset_button_button_up"]
 [connection signal="button_up" from="Roots/WaterCheat" to="Roots" method="_on_water_cheat_button_up"]
