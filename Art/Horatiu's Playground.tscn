@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cl77pla1q3h74" path="res://Scenes/Path.tscn" id="15_2i21q"]
 [ext_resource type="PackedScene" uid="uid://jy7ksr2asypk" path="res://Art/Root/root_joint_graphics.tscn" id="16_py3m8"]
 [ext_resource type="Material" uid="uid://dfymclah4c56k" path="res://Art/water meter/water meter_material.tres" id="21_hatrw"]
-[ext_resource type="Texture2D" uid="uid://cxr5a83knbxey" path="res://Art/water meter/sphere.png" id="22_y6jiu"]
+[ext_resource type="Texture2D" uid="uid://ctq4q6q57wonb" path="res://Art/water meter/sphere (1).png" id="22_ybpfg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iblmn"]
 shader = ExtResource("1_fwgbb")
@@ -154,5 +154,5 @@ offset_left = 61.0
 offset_top = -325.0
 offset_right = 361.0
 offset_bottom = -25.0
-texture = ExtResource("22_y6jiu")
+texture = ExtResource("22_ybpfg")
 expand_mode = 2

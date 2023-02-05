@@ -6,7 +6,7 @@
 
 [sub_resource type="Gradient" id="Gradient_5hdyd"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0.2589, 0.38835, 0.521036)
+offsets = PackedFloat32Array(0.271845, 0.411215, 0.521036)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_kglou"]
@@ -27,6 +27,8 @@ shader_parameter/wobbleTimeSpeed = 7.626
 shader_parameter/WobbleHeight = 0.008
 shader_parameter/WaterScrollSpeed = Vector2(0.2, 0.586)
 shader_parameter/WaterGradAmount = Vector2(0.494, 0.656)
+shader_parameter/Border_color = Color(0.527641, 0.132001, 0.020993, 1)
+shader_parameter/border_size = 0.462
 shader_parameter/waterlevelborder = SubResource("GradientTexture1D_niwil")
 shader_parameter/water_noise = ExtResource("3_j0s3x")
 shader_parameter/circleedge = SubResource("GradientTexture1D_kglou")
