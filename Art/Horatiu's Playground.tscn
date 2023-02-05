@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dxhlx1p3quat4"]
+[gd_scene load_steps=42 format=3 uid="uid://dxhlx1p3quat4"]
 
 [ext_resource type="Shader" uid="uid://cqx08qwusatfs" path="res://Art/GROUND/ground shader.tres" id="1_fwgbb"]
 [ext_resource type="Texture2D" uid="uid://bjy7fq0eh4p08" path="res://Art/GROUND/Untitled_Artwork-1.png" id="1_vt2u1"]
@@ -29,6 +29,8 @@
 [ext_resource type="Material" uid="uid://dfymclah4c56k" path="res://Art/water meter/water meter_material.tres" id="21_hatrw"]
 [ext_resource type="Texture2D" uid="uid://ctq4q6q57wonb" path="res://Art/water meter/sphere (1).png" id="22_ybpfg"]
 [ext_resource type="PackedScene" uid="uid://c8otyn0pbqvjq" path="res://Art/restart_butotn/restart_icon.tscn" id="29_sroxq"]
+[ext_resource type="Shader" uid="uid://do0qggnd5snjb" path="res://Art/handicon_shader.tres" id="30_6rbhf"]
+[ext_resource type="Texture2D" uid="uid://ibjdnxjx6p07" path="res://Art/handicon.png" id="31_sysq6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iblmn"]
 shader = ExtResource("1_fwgbb")
@@ -76,6 +78,10 @@ graph_offset = Vector2(-396.992, 37.5903)
 [sub_resource type="ShaderMaterial" id="20"]
 render_priority = 0
 shader = SubResource("19")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5f6dn"]
+shader = ExtResource("30_6rbhf")
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
 [node name="Node2D" type="Node2D"]
 
@@ -191,3 +197,10 @@ texture = ExtResource("22_ybpfg")
 expand_mode = 2
 
 [node name="RestartIcon" parent="." instance=ExtResource("29_sroxq")]
+
+[node name="Handicon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5f6dn")
+position = Vector2(910, 200)
+rotation = -2.15263
+scale = Vector2(0.41975, 0.351871)
+texture = ExtResource("31_sysq6")
