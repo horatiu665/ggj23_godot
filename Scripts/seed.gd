@@ -11,7 +11,8 @@ class_name Seed
 @export var startJoint:Node2D
 @export var waterLabel:RichTextLabel
 @export var pickupsNode:Node
-
+@export var levelUpThreshold:float = 500
+@export var plant:Plant 
 
 var pathScene = load("res://Scenes/Path.tscn")
 var jointScene = load("res://Scenes/Joint.tscn")
@@ -162,6 +163,10 @@ func _process(delta:float):
 		
 
 	waterLabel.text = str(water as int)
+	
+	if water > levelUpThreshold:
+		water -= levelUpThreshold
+		plant.next_level()
 	
 	
 func update_growing(delta:float):

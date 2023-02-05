@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://71xx3l7iffqu"]
+[gd_scene load_steps=23 format=3 uid="uid://cpoqg5x1nkdr8"]
 
 [ext_resource type="Script" path="res://Scripts/seed.gd" id="1_gc6re"]
 [ext_resource type="PackedScene" uid="uid://c458imdbcbtho" path="res://Scenes/Water.tscn" id="4_a25cb"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://dnimkwlvff6jl" path="res://Audio/chapter2.wav" id="14_llskd"]
 [ext_resource type="AudioStream" uid="uid://ddt2jmi35tuv7" path="res://Audio/chapter3.wav" id="15_ufn70"]
 [ext_resource type="PackedScene" uid="uid://nw4koigbnpnw" path="res://Scenes/Seed.tscn" id="18_0v7yh"]
+[ext_resource type="PackedScene" uid="uid://bhf50s12lpqxn" path="res://Scenes/Plant.tscn" id="18_rww4f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ur6oc"]
 shader = ExtResource("5_eyhnw")
@@ -64,7 +65,7 @@ material = SubResource("CanvasItemMaterial_mwpdo")
 points = PackedVector2Array(0, 0, 100, 100, 200, 300)
 joint_mode = 1
 
-[node name="Roots" type="Node2D" parent="." node_paths=PackedStringArray("inputPath", "startJoint", "waterLabel", "pickupsNode")]
+[node name="Roots" type="Node2D" parent="." node_paths=PackedStringArray("inputPath", "startJoint", "waterLabel", "pickupsNode", "plant")]
 rotation = 0.00192257
 script = ExtResource("1_gc6re")
 inputPath = NodePath("../InputPath")
@@ -75,6 +76,7 @@ startwater = 0.0
 startJoint = NodePath("Seed")
 waterLabel = NodePath("WaterLabel")
 pickupsNode = NodePath("../Pickups")
+plant = NodePath("../Plant")
 
 [node name="WaterLabel" type="RichTextLabel" parent="Roots"]
 offset_left = 15.0
@@ -148,6 +150,7 @@ offset_right = 2556.0
 offset_bottom = 1924.0
 
 [node name="SKY ROCK" type="StaticBody2D" parent="Rocks"]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rocks/SKY ROCK"]
 polygon = PackedVector2Array(-163, 372, 2821, 372, 2866, -106, -206, -109)
@@ -232,6 +235,9 @@ autoplay = true
 attenuation = 1e-05
 script = ExtResource("13_lryvs")
 max_volume = 1.0
+
+[node name="Plant" parent="." instance=ExtResource("18_rww4f")]
+position = Vector2(1332, 371)
 
 [connection signal="button_up" from="Roots/ResetButton" to="Roots" method="_on_reset_button_button_up"]
 [connection signal="button_up" from="Roots/WaterCheat" to="Roots" method="_on_water_cheat_button_up"]
