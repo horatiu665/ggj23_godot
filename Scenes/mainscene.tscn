@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cpoqg5x1nkdr8"]
+[gd_scene load_steps=31 format=3 uid="uid://cpoqg5x1nkdr8"]
 
 [ext_resource type="Script" path="res://Scripts/seed.gd" id="1_gc6re"]
 [ext_resource type="PackedScene" uid="uid://c458imdbcbtho" path="res://Scenes/Water.tscn" id="4_a25cb"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://nw4koigbnpnw" path="res://Scenes/Seed.tscn" id="18_0v7yh"]
 [ext_resource type="PackedScene" uid="uid://bhf50s12lpqxn" path="res://Scenes/Plant.tscn" id="18_rww4f"]
 [ext_resource type="Material" uid="uid://dfymclah4c56k" path="res://Art/water meter/water meter_material.tres" id="19_ahjug"]
+[ext_resource type="Shader" uid="uid://do0qggnd5snjb" path="res://Art/handicon_shader.tres" id="21_piqse"]
+[ext_resource type="Texture2D" uid="uid://ibjdnxjx6p07" path="res://Art/handicon.png" id="22_3amm5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ur6oc"]
 shader = ExtResource("5_eyhnw")
@@ -32,6 +34,119 @@ size = Vector3(1200, 1200, 10)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ueldc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mwpdo"]
+
+[sub_resource type="Animation" id="Animation_jxseq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand Tutorial Anim/Handicon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1389, 558)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand Tutorial Anim/Handicon:material:shader_parameter/ColorParameter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Hand Tutorial Anim/Handicon:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1483, 683)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node2D/Hand Tutorial Anim/Handicon:material:shader_parameter/ColorParameter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gvmie"]
+resource_name = "tutorial"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand Tutorial Anim/Handicon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1389, 558), Vector2(1402, 644)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand Tutorial Anim/Handicon:material:shader_parameter/ColorParameter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Hand Tutorial Anim/Handicon:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1438, 563), Vector2(1483, 683)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node2D/Hand Tutorial Anim/Handicon:material:shader_parameter/ColorParameter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7h3f7"]
+_data = {
+"RESET": SubResource("Animation_jxseq"),
+"tutorial": SubResource("Animation_gvmie")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ls7b"]
+shader = ExtResource("21_piqse")
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
 [node name="mainscene" type="Node2D"]
 
@@ -67,7 +182,9 @@ material = SubResource("CanvasItemMaterial_mwpdo")
 points = PackedVector2Array(0, 0, 100, 100, 200, 300)
 joint_mode = 1
 
-[node name="Roots" type="Node2D" parent="." node_paths=PackedStringArray("inputPath", "startJoint", "waterLabel", "pickupsNode", "plant", "waterMeter")]
+[node name="Roots" type="Node2D" parent="." node_paths=PackedStringArray("inputPath", "startJoint", "waterLabel", "pickupsNode", "plant", "waterMeter", "hand", "handAnim")]
+z_index = 200
+z_as_relative = false
 rotation = 0.00192257
 script = ExtResource("1_gc6re")
 inputPath = NodePath("../InputPath")
@@ -80,6 +197,8 @@ pickupsNode = NodePath("../Pickups")
 levelUpThreshold = 1000.0
 plant = NodePath("../Plant")
 waterMeter = NodePath("WaterMeter")
+hand = NodePath("../Node2D/Hand Tutorial Anim/Handicon")
+handAnim = NodePath("../Node2D/Hand Tutorial Anim")
 
 [node name="WaterLabel" type="RichTextLabel" parent="Roots"]
 visible = false
@@ -100,7 +219,7 @@ theme_override_font_sizes/font_size = 50
 text = "RESET"
 
 [node name="Seed" parent="Roots" instance=ExtResource("18_0v7yh")]
-position = Vector2(1392.85, 438.323)
+position = Vector2(1331.91, 470.44)
 rotation = -0.00192257
 
 [node name="WaterMeter" type="TextureRect" parent="Roots"]
@@ -175,11 +294,35 @@ position = Vector2(549, 1792)
 [node name="Water2" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(697, 1714)
 
+[node name="Water31" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(861, 1678)
+
+[node name="Water32" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(861, 1678)
+
+[node name="Water6" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(864, 1954)
+
+[node name="Water29" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(726, 1841)
+
+[node name="Water30" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(726, 1841)
+
+[node name="Water27" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(654, 2033)
+
+[node name="Water28" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(654, 2033)
+
+[node name="Water7" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(1276, 657)
+
+[node name="Water26" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(1416, 668)
+
 [node name="Water3" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(659, 1591)
-
-[node name="Water5" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(709, 722)
 
 [node name="Water8" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(2472, 1423)
@@ -216,17 +359,11 @@ rotation = 0.243594
 position = Vector2(2527, 1503)
 rotation = 0.243594
 
-[node name="Water10" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(743, 619)
-
 [node name="Water11" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(2054, 661)
 
 [node name="Water12" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(2043, 539)
-
-[node name="Water13" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(774, 704)
 
 [node name="Water4" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(490, 1639)
@@ -243,15 +380,24 @@ position = Vector2(2127, 586)
 [node name="Water16" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(765, 1369)
 
-[node name="Node2D" type="Node2D" parent="Pickups"]
+[node name="Water33" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(520, 608)
 
-[node name="Water6" parent="Pickups/Node2D" instance=ExtResource("4_a25cb")]
-position = Vector2(540, 661)
+[node name="Water35" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(669, 717)
+
+[node name="Water36" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(648, 523)
+
+[node name="Water37" parent="Pickups" instance=ExtResource("4_a25cb")]
+position = Vector2(744, 636)
+
+[node name="Water34" parent="Pickups" node_paths=PackedStringArray("sprite", "audioPlayer") instance=ExtResource("4_a25cb")]
+position = Vector2(1166, 1360)
 rotation = -0.259603
 scale = Vector2(1, 1)
-
-[node name="Water7" parent="Pickups/Node2D" instance=ExtResource("4_a25cb")]
-position = Vector2(626, 699)
+sprite = NodePath("../Water6/Icon")
+audioPlayer = NodePath("../Water6/AudioPlayer")
 
 [node name="AudioParent" type="Node" parent="."]
 
@@ -287,6 +433,22 @@ script = ExtResource("13_lryvs")
 max_volume = 1.0
 
 [node name="Plant" parent="." instance=ExtResource("18_rww4f")]
-position = Vector2(1390, 445)
+position = Vector2(1343, 405)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(36, 4)
+
+[node name="Hand Tutorial Anim" type="AnimationPlayer" parent="Node2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_7h3f7")
+}
+
+[node name="Handicon" type="Sprite2D" parent="Node2D/Hand Tutorial Anim"]
+material = SubResource("ShaderMaterial_8ls7b")
+position = Vector2(1483, 683)
+rotation = -2.15263
+scale = Vector2(0.41975, 0.351871)
+texture = ExtResource("22_3amm5")
 
 [connection signal="button_up" from="Roots/ResetButton" to="Roots" method="_on_reset_button_button_up"]

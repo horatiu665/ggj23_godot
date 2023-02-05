@@ -16,6 +16,9 @@ class_name Seed
 @export var plant:Plant 
 @export var waterMeter:TextureRect
 
+@export var hand:CanvasItem
+@export var handAnim:AnimationPlayer
+
 var pathScene = load("res://Scenes/Path.tscn")
 var jointScene = load("res://Scenes/Joint.tscn")
 
@@ -48,6 +51,8 @@ func _ready():
 	joints.append(startJoint as Joint)
 	
 	water = startwater
+	
+	handAnim.play("tutorial")
 	
 
 func _on_reset_button_button_up():
@@ -136,6 +141,8 @@ func _process(delta:float):
 				joints.append(joint)
 			
 			print("Starting growth from:",joint)
+			
+			hand.visible = false
 			
 			drawingPath = true
 			inputPath.clear_points()

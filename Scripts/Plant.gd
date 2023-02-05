@@ -70,7 +70,8 @@ func next_level():
 	if shakeTime != -1:
 		return
 		
-	audioPlayer.stream = audio[level-1]
+		
+	audioPlayer.stream = audio[level]
 	audioPlayer.play()
 		
 	shakeTime = 0
