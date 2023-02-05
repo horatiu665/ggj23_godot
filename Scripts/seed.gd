@@ -1,5 +1,6 @@
 extends Node2D
 
+class_name Seed
 
 @export var inputPath:Line2D
 @export var growSpeed:float = 100
@@ -10,7 +11,8 @@ extends Node2D
 @export var startJoint:Node2D
 @export var waterLabel:RichTextLabel
 @export var pickupsNode:Node
-
+@export var levelUpThreshold:float = 500
+@export var plant:Plant 
 
 var pathScene = load("res://Scenes/Path.tscn")
 var jointScene = load("res://Scenes/Joint.tscn")
@@ -27,9 +29,11 @@ var growingRootLenght:float
 var growingSectionLength:float
 var jointDistAccumulator:float
 
+var pathZIndex:int = 100
+
 var joints:Array[Joint]
 
-var water:float = 1000
+var water:float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,6 +59,10 @@ func _process(delta:float):
 	
 	var mouseBtn = Input.is_action_pressed("mouse_down");
 	
+	
+	if plant.is_upgrading():
+		return
+	
 	if mouseBtn && !drawingPath:
 		
 		# Find joint closts to mouse pos that is inside raidus (if any)
@@ -62,6 +70,9 @@ func _process(delta:float):
 		var startPoint:Vector2
 		var startPointFound:bool
 		var minDist:float = 9999
+		var startPath:Path
+		
+		# search joints
 		for j in joints:
 			
 			var dist = j.position.distance_to(mousePos)
@@ -70,29 +81,35 @@ func _process(delta:float):
 				startPointFound = true
 				startPoint = j.position
 				joint = j
-			
-			
-			for path in j.paths:
-				for p in path.points:
-					
-					dist = p.distance_to(mousePos)
-					if dist < 50 && dist < minDist:
-						minDist = dist
-						startPointFound = true
-						startPoint = p
+				break
+				
+		# srearch paths
+		if joint == null:
+			for j in joints:
+				for path in j.paths:
+					for p in path.points:
+						
+						var dist = p.distance_to(mousePos)
+						if dist < 50 && dist < minDist:
+							minDist = dist
+							startPointFound = true
+							startPoint = p
+							startPath = path
 						
 			
 		
 		if startPointFound:
 			
 			# if not joint found craate one
-			if joint != startJoint:
-				joint = jointScene.instantiate()
+			if joint == null:
+				joint = jointScene.instantiate() as Joint
 				add_child(joint)
 				joint.position = startPoint
+				joint.parentPath = startPath
 				joint.radius = 200
 				joints.append(joint)
 			
+			print("Starting growth from:",joint)
 			
 			drawingPath = true
 			inputPath.clear_points()
@@ -120,7 +137,9 @@ func _process(delta:float):
 	
 	# Input path is only valid after a certain length
 	var inputPathValid = inputPath.points.size() > 1 && \
-		+ inputPath.points[0].distance_to(inputPath.points[inputPath.points.size()-1]) > 30
+		+ inputPath.points[0].distance_to(inputPath.points[inputPath.points.size()-1]) > 100
+	
+	#print("inputPathValid:",inputPathValid, " drawing:", drawingPath, " growing:", growingRoot != null)
 	
 	if growingRoot != null && inputPathValid:
 		update_growing(delta)
@@ -136,26 +155,32 @@ func _process(delta:float):
 			var endPoint = path.points[path.points.size()-1]
 						
 			for child in pickupsNode.get_children():
+				
 				var pickup = child as Pickup
+				if pickup.isAbsorbing:
+					continue
+				
 				var dist = endPoint.distance_to(pickup.position)
-				if dist < 100:
+				if dist < pickup.pickupDist:
+					pickup.absorb(self,endPoint)
 					
-					water += pickup.water
-					
-					pickup.queue_free()
 		
 
 	waterLabel.text = str(water as int)
+	
+	if water > levelUpThreshold:
+		water -= levelUpThreshold
+		plant.next_level()
 	
 	
 func update_growing(delta:float):
 	var deltaLength = growSpeed*delta
 	
 	# cant grow without water
-	water -= deltaLength
-	if water < 0:
-		water = 0
-		return
+#	water -= deltaLength
+#	if water < 0:
+#		water = 0
+#		return
 	
 	growingRootLenght += deltaLength
 	
@@ -165,6 +190,7 @@ func update_growing(delta:float):
 	# Test from reaching end of input
 	if result.index == inputPath.points.size() -1:
 		growingRoot = null
+		print("REACED END!!!!!!")
 		return
 
 	var pos = inputPath.points[result.index]
@@ -179,6 +205,7 @@ func update_growing(delta:float):
 	var rayResult = get_world_2d().direct_space_state.intersect_ray(rayParam)
 	if rayResult.size() > 0:
 		growingRoot = null
+		print("Collision!!!")
 		return
 
 
@@ -217,13 +244,14 @@ func update_growing(delta:float):
 #		growingSectionLength = 0
 #		jointDistAccumulator = jointDistAccumulator - jointDist
 
+	growingRoot.increase_width(delta)
 
 	# Detect next segment
 	growingSectionLength += deltaLength
 	if growingSectionLength > growSectionmaxLength:
 		growingSectionLength -= growSectionmaxLength
 
-		print("new point at length",growingRootLenght, " pos:", newPoint)
+	#	print("new point at length",growingRootLenght, " pos:", newPoint)
 		growingRoot.add_point(newPoint)
 	else:
 		growingRoot.set_point_position(growingRoot.points.size()-1, newPoint)
@@ -238,7 +266,8 @@ func create_path(joint:Joint) -> Path:
 	
 	path.clear_points()
 	path.add_point(joint.position)
-	
+	pathZIndex -= 1
+	path.z_index = pathZIndex
 	joint.paths.append(path)
 	
 	return path
@@ -297,7 +326,7 @@ func _input(event):
 		
 		if drawingPath:
 			inputPath.add_point(mousePos)
-		print("Mouse Motion at: ", event.position)
+	#	print("Mouse Motion at: ", event.position)
 
 
 	

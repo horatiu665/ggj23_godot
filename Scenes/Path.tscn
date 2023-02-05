@@ -13,7 +13,7 @@ shader_parameter/TexRidges = ExtResource("3_02cm7")
 shader_parameter/GradientMap = ExtResource("2_qs32o")
 
 [sub_resource type="Curve" id="Curve_qxnv8"]
-_data = [Vector2(0.161079, 1), 0.0, 0.0, 0, 0, Vector2(0.648516, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.018018), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.161079, 1), 0.0, 0.0, 0, 0, Vector2(0.869512, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.018018), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_wr6or"]
@@ -27,3 +27,5 @@ gradient = SubResource("Gradient_wr6or")
 texture = ExtResource("3_02cm7")
 texture_mode = 1
 script = ExtResource("1_aaqgv")
+minWidth = 20.0
+maxWidth = 130.0

@@ -1,7 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://71xx3l7iffqu"]
+[gd_scene load_steps=23 format=3 uid="uid://cpoqg5x1nkdr8"]
 
 [ext_resource type="Script" path="res://Scripts/seed.gd" id="1_gc6re"]
-[ext_resource type="PackedScene" uid="uid://ugxkgcg3s0u0" path="res://Scenes/Joint.tscn" id="3_ex0ir"]
 [ext_resource type="PackedScene" uid="uid://c458imdbcbtho" path="res://Scenes/Water.tscn" id="4_a25cb"]
 [ext_resource type="Texture2D" uid="uid://bjy7fq0eh4p08" path="res://Art/GROUND/Untitled_Artwork-1.png" id="4_su08x"]
 [ext_resource type="Shader" uid="uid://cqx08qwusatfs" path="res://Art/GROUND/ground shader.tres" id="5_eyhnw"]
@@ -17,6 +16,8 @@
 [ext_resource type="AudioStream" uid="uid://kwr673b1txo6" path="res://Audio/chapter1.wav" id="13_np6gu"]
 [ext_resource type="AudioStream" uid="uid://dnimkwlvff6jl" path="res://Audio/chapter2.wav" id="14_llskd"]
 [ext_resource type="AudioStream" uid="uid://ddt2jmi35tuv7" path="res://Audio/chapter3.wav" id="15_ufn70"]
+[ext_resource type="PackedScene" uid="uid://nw4koigbnpnw" path="res://Scenes/Seed.tscn" id="18_0v7yh"]
+[ext_resource type="PackedScene" uid="uid://bhf50s12lpqxn" path="res://Scenes/Plant.tscn" id="18_rww4f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ur6oc"]
 shader = ExtResource("5_eyhnw")
@@ -60,23 +61,24 @@ mesh = SubResource("BoxMesh_pjg5b")
 texture = SubResource("PlaceholderTexture2D_ueldc")
 
 [node name="InputPath" type="Line2D" parent="."]
+z_index = 100
 material = SubResource("CanvasItemMaterial_mwpdo")
 points = PackedVector2Array(0, 0, 100, 100, 200, 300)
 joint_mode = 1
 
-[node name="Roots" type="Node2D" parent="." node_paths=PackedStringArray("inputPath", "startJoint", "waterLabel", "pickupsNode")]
+[node name="Roots" type="Node2D" parent="." node_paths=PackedStringArray("inputPath", "startJoint", "waterLabel", "pickupsNode", "plant")]
 rotation = 0.00192257
 script = ExtResource("1_gc6re")
 inputPath = NodePath("../InputPath")
 growSpeed = 200.0
 jointDist = 20000.0
 jointDropFraction = 1.1
-startJoint = NodePath("Joint")
+startwater = 0.0
+startJoint = NodePath("Seed")
 waterLabel = NodePath("WaterLabel")
 pickupsNode = NodePath("../Pickups")
-
-[node name="Joint" parent="Roots" instance=ExtResource("3_ex0ir")]
-position = Vector2(1350.72, 374.404)
+levelUpThreshold = 200.0
+plant = NodePath("../Plant")
 
 [node name="WaterLabel" type="RichTextLabel" parent="Roots"]
 offset_left = 15.0
@@ -103,13 +105,17 @@ offset_bottom = 215.247
 theme_override_font_sizes/font_size = 50
 text = "Water Cheat"
 
+[node name="Seed" parent="Roots" instance=ExtResource("18_0v7yh")]
+position = Vector2(1325.84, 433.452)
+rotation = -0.00192257
+
 [node name="Rocks" type="Node" parent="."]
 
 [node name="Rock2 (b)" parent="Rocks" instance=ExtResource("8_tdb00")]
-offset_left = 1330.0
-offset_top = 884.0
-offset_right = 1924.0
-offset_bottom = 1406.0
+offset_left = 1233.0
+offset_top = 808.0
+offset_right = 1827.0
+offset_bottom = 1330.0
 rotation = -0.680641
 
 [node name="Rock2 (b)2" parent="Rocks" instance=ExtResource("8_tdb00")]
@@ -127,17 +133,17 @@ offset_bottom = 1711.0
 rotation = -1.0885
 
 [node name="mossz5" parent="Rocks" instance=ExtResource("8_7mxb3")]
-offset_left = 2594.0
-offset_top = 582.0
-offset_right = 3188.0
-offset_bottom = 1104.0
+offset_left = 2350.0
+offset_top = 527.0
+offset_right = 2944.0
+offset_bottom = 1049.0
 rotation = -4.75511
 
 [node name="mossz4" parent="Rocks" instance=ExtResource("9_8juut")]
-offset_left = 1217.0
-offset_top = 1170.0
-offset_right = 1811.0
-offset_bottom = 1692.0
+offset_left = 1260.0
+offset_top = 1301.0
+offset_right = 1854.0
+offset_bottom = 1823.0
 
 [node name="mossz6" parent="Rocks" instance=ExtResource("9_8juut")]
 offset_left = 1962.0
@@ -146,6 +152,7 @@ offset_right = 2556.0
 offset_bottom = 1924.0
 
 [node name="SKY ROCK" type="StaticBody2D" parent="Rocks"]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rocks/SKY ROCK"]
 polygon = PackedVector2Array(-163, 372, 2821, 372, 2866, -106, -206, -109)
@@ -162,32 +169,29 @@ position = Vector2(697, 1714)
 position = Vector2(659, 1591)
 
 [node name="Water5" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(1208, 772)
+position = Vector2(971, 639)
 
 [node name="Water6" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(1356, 694)
+position = Vector2(1153, 743)
 rotation = -0.259603
 
-[node name="Water7" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(1318, 571)
-
 [node name="Water8" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(1897, 1437)
+position = Vector2(2045, 1365)
 
 [node name="Water9" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(2045, 1359)
+position = Vector2(2187, 1283)
 
 [node name="Water10" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(2007, 1236)
 
 [node name="Water11" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(1064, 1562)
+position = Vector2(935, 1420)
 
 [node name="Water12" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(946, 1725)
+position = Vector2(846, 1670)
 
 [node name="Water13" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(952, 1615)
+position = Vector2(808, 1543)
 
 [node name="Water4" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(490, 1639)
@@ -199,7 +203,7 @@ position = Vector2(1279, 1143)
 position = Vector2(1070, 1303)
 
 [node name="Water16" parent="Pickups" instance=ExtResource("4_a25cb")]
-position = Vector2(858, 1439)
+position = Vector2(765, 1369)
 
 [node name="AudioParent" type="Node" parent="."]
 
@@ -233,6 +237,9 @@ autoplay = true
 attenuation = 1e-05
 script = ExtResource("13_lryvs")
 max_volume = 1.0
+
+[node name="Plant" parent="." instance=ExtResource("18_rww4f")]
+position = Vector2(1330, 403)
 
 [connection signal="button_up" from="Roots/ResetButton" to="Roots" method="_on_reset_button_button_up"]
 [connection signal="button_up" from="Roots/WaterCheat" to="Roots" method="_on_water_cheat_button_up"]
