@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://bbg78dbdyaxj4"]
+[gd_scene load_steps=39 format=3 uid="uid://dxhlx1p3quat4"]
 
 [ext_resource type="Shader" uid="uid://cqx08qwusatfs" path="res://Art/GROUND/ground shader.tres" id="1_fwgbb"]
+[ext_resource type="Texture2D" uid="uid://bjy7fq0eh4p08" path="res://Art/GROUND/Untitled_Artwork-1.png" id="1_vt2u1"]
 [ext_resource type="Texture2D" uid="uid://df13l45dkifhh" path="res://Art/GROUND/grounddddd.png" id="2_hg8mp"]
 [ext_resource type="Texture2D" uid="uid://l5m6ye6m8evq" path="res://Art/GROUND/ground gradient2.tres" id="3_fc0co"]
 [ext_resource type="Shader" uid="uid://871x4pydq2oq" path="res://Art/plant/plant shader.tres" id="4_ceq5x"]
@@ -27,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://jy7ksr2asypk" path="res://Art/Root/root_joint_graphics.tscn" id="16_py3m8"]
 [ext_resource type="Material" uid="uid://dfymclah4c56k" path="res://Art/water meter/water meter_material.tres" id="21_hatrw"]
 [ext_resource type="Texture2D" uid="uid://ctq4q6q57wonb" path="res://Art/water meter/sphere (1).png" id="22_ybpfg"]
+[ext_resource type="PackedScene" uid="uid://c8otyn0pbqvjq" path="res://Art/restart_butotn/restart_icon.tscn" id="29_sroxq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iblmn"]
 shader = ExtResource("1_fwgbb")
@@ -76,6 +78,17 @@ render_priority = 0
 shader = SubResource("19")
 
 [node name="Node2D" type="Node2D"]
+
+[node name="background (painting)2" type="TextureRect" parent="."]
+texture_repeat = 3
+offset_left = -1652.0
+offset_top = -908.0
+offset_right = 4534.0
+offset_bottom = 2425.0
+scale = Vector2(1.214, 1.214)
+texture = ExtResource("1_vt2u1")
+expand_mode = 2
+stretch_mode = 1
 
 [node name="background" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_iblmn")
@@ -176,3 +189,5 @@ offset_right = 361.0
 offset_bottom = -25.0
 texture = ExtResource("22_ybpfg")
 expand_mode = 2
+
+[node name="RestartIcon" parent="." instance=ExtResource("29_sroxq")]

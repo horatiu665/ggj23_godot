@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8otyn0pbqvjq"]
+
+[ext_resource type="Material" uid="uid://b2k8q5p8u8m1f" path="res://Art/restart_butotn/restart_button_shadermaterial.tres" id="1_626ox"]
+[ext_resource type="Texture2D" uid="uid://dv7nwe14jn1qd" path="res://Art/restart_butotn/Flat_restart_icon.svg.png" id="2_ri8bk"]
+
+[node name="RestartIcon" type="Sprite2D"]
+material = ExtResource("1_626ox")
+position = Vector2(1798, -289)
+scale = Vector2(0.119137, 0.119137)
+texture = ExtResource("2_ri8bk")
