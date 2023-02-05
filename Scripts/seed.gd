@@ -28,6 +28,8 @@ var growingRootLenght:float
 var growingSectionLength:float
 var jointDistAccumulator:float
 
+var pathZIndex:int = 9999
+
 var joints:Array[Joint]
 
 var water:float = 1000
@@ -248,7 +250,8 @@ func create_path(joint:Joint) -> Path:
 	
 	path.clear_points()
 	path.add_point(joint.position)
-	
+	pathZIndex -= 1
+	path.z_index = pathZIndex
 	joint.paths.append(path)
 	
 	return path

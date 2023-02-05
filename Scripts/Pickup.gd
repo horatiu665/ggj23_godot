@@ -9,6 +9,7 @@ class_name Pickup
 @export var spriteRotSpeed:float = 1
 @export var sprite:Node2D
 @export var sizeCurve:Curve
+@export var audioPlayer:AudioStreamPlayer2D
 
 
 var isAbsorbing:bool
@@ -17,6 +18,7 @@ var startPoint:Vector2
 var seed:Seed
 var water:float
 var rotSpeed:float
+var absorbSoundPlayed:bool
 
 
 # Called when the node enters the scene tree for the first time.
@@ -25,7 +27,7 @@ func _ready():
 	rotation = x
 	water = startWater	
 	startPoint = position
-	update_sprite_scale()
+	update_sprite(0)
 	pass # Replace with function body.
 
 
@@ -38,10 +40,12 @@ func absorb(seed:Seed, point:Vector2):
 	var rng = RandomNumberGenerator.new()
 	rotSpeed =  rng.randf_range(-spriteRotSpeed, spriteRotSpeed)
 	
+	
+	
 					
 	pass
 
-func update_sprite_scale():
+func update_sprite(delta:float):
 	
 	
 	var waterFraction = water/startWater
@@ -56,6 +60,11 @@ func update_sprite_scale():
 	if isAbsorbing:
 		position = absorbPoint -  (absorbPoint - startPoint)*mappedFraction
 		
+		if !absorbSoundPlayed && mappedFraction < 0.6:
+			audioPlayer.play()
+			absorbSoundPlayed = true
+		
+		rotation += rotSpeed*delta
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -69,9 +78,9 @@ func _process(delta):
 		water -= amount
 		seed.water += amount
 		
-		update_sprite_scale()
+		update_sprite(delta)
 		
-		rotation += rotSpeed*delta
+		
 		#position = lerp(position,absorbPoint,delta*1)
 		
 		if water == 0:

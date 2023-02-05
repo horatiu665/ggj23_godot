@@ -135,10 +135,10 @@ offset_bottom = 1049.0
 rotation = -4.75511
 
 [node name="mossz4" parent="Rocks" instance=ExtResource("9_8juut")]
-offset_left = 1228.0
-offset_top = 1223.0
-offset_right = 1822.0
-offset_bottom = 1745.0
+offset_left = 1260.0
+offset_top = 1301.0
+offset_right = 1854.0
+offset_bottom = 1823.0
 
 [node name="mossz6" parent="Rocks" instance=ExtResource("9_8juut")]
 offset_left = 1962.0

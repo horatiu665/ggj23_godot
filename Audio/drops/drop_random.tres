@@ -1,0 +1,29 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=9 format=3 uid="uid://t6vhsf8s5wyj"]
+
+[ext_resource type="AudioStream" uid="uid://c1wfl4ii7vr2t" path="res://Audio/drops/drop1.wav" id="1_mgtkc"]
+[ext_resource type="AudioStream" uid="uid://bc1orjp88r44j" path="res://Audio/drops/drop2.wav" id="2_1entr"]
+[ext_resource type="AudioStream" uid="uid://dv6o0eg3bmct3" path="res://Audio/drops/drop3.wav" id="3_5wao6"]
+[ext_resource type="AudioStream" uid="uid://dv31o24jcr8hu" path="res://Audio/drops/drop4.wav" id="4_xhctw"]
+[ext_resource type="AudioStream" uid="uid://vjwyopmjycj5" path="res://Audio/drops/drop5.wav" id="5_em7t3"]
+[ext_resource type="AudioStream" uid="uid://bsh08a7k8mxfp" path="res://Audio/drops/drop6.wav" id="6_1ap4h"]
+[ext_resource type="AudioStream" uid="uid://drcg182jbrsrj" path="res://Audio/drops/drop7.wav" id="7_vwquj"]
+[ext_resource type="AudioStream" uid="uid://d15hp1m0agjas" path="res://Audio/drops/drop8.wav" id="8_6rupr"]
+
+[resource]
+streams_count = 8
+stream_0/stream = ExtResource("1_mgtkc")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_1entr")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_5wao6")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_xhctw")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("5_em7t3")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("6_1ap4h")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("7_vwquj")
+stream_6/weight = 1.0
+stream_7/stream = ExtResource("8_6rupr")
+stream_7/weight = 1.0
