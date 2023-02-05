@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://kwr673b1txo6" path="res://Audio/chapter1.wav" id="13_np6gu"]
 [ext_resource type="AudioStream" uid="uid://dnimkwlvff6jl" path="res://Audio/chapter2.wav" id="14_llskd"]
 [ext_resource type="AudioStream" uid="uid://ddt2jmi35tuv7" path="res://Audio/chapter3.wav" id="15_ufn70"]
-[ext_resource type="PackedScene" uid="uid://nw4koigbnpnw" path="res://Scenes/Seed.tscn" id="18_0v7yh"]
+[ext_resource type="PackedScene" path="res://Scenes/Seed.tscn" id="18_0v7yh"]
 [ext_resource type="PackedScene" uid="uid://bhf50s12lpqxn" path="res://Scenes/Plant.tscn" id="18_rww4f"]
 [ext_resource type="Material" uid="uid://dfymclah4c56k" path="res://Art/water meter/water meter_material.tres" id="19_ahjug"]
 [ext_resource type="Shader" uid="uid://do0qggnd5snjb" path="res://Art/handicon_shader.tres" id="21_piqse"]
@@ -392,12 +392,9 @@ position = Vector2(648, 523)
 [node name="Water37" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(744, 636)
 
-[node name="Water34" parent="Pickups" node_paths=PackedStringArray("sprite", "audioPlayer") instance=ExtResource("4_a25cb")]
+[node name="Water34" parent="Pickups" instance=ExtResource("4_a25cb")]
 position = Vector2(1166, 1360)
 rotation = -0.259603
-scale = Vector2(1, 1)
-sprite = NodePath("../Water6/Icon")
-audioPlayer = NodePath("../Water6/AudioPlayer")
 
 [node name="AudioParent" type="Node" parent="."]
 
