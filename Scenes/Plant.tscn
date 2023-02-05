@@ -1,16 +1,26 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhf50s12lpqxn"]
+[gd_scene load_steps=18 format=3 uid="uid://bhf50s12lpqxn"]
 
 [ext_resource type="Script" path="res://Scripts/Plant.gd" id="1_3g6m2"]
 [ext_resource type="Texture2D" uid="uid://d225lqlc0s5uh" path="res://Art/plant/plant1.png" id="2_8agc5"]
-[ext_resource type="AudioStream" uid="uid://kwr673b1txo6" path="res://Audio/chapter1.wav" id="2_pag4g"]
-[ext_resource type="AudioStream" uid="uid://dnimkwlvff6jl" path="res://Audio/chapter2.wav" id="3_2fy5y"]
+[ext_resource type="Shader" uid="uid://871x4pydq2oq" path="res://Art/plant/plant shader.tres" id="2_tfcot"]
 [ext_resource type="Texture2D" uid="uid://b4atvpsdhehdx" path="res://Art/plant/plant2.png" id="3_20ri0"]
+[ext_resource type="Texture2D" uid="uid://bl4pruj366kf3" path="res://Art/plant/cili gradient.tres" id="3_wonyy"]
 [ext_resource type="Texture2D" uid="uid://cqxib1kvpi2o1" path="res://Art/plant/plant3.png" id="4_4hf5n"]
-[ext_resource type="AudioStream" uid="uid://ddt2jmi35tuv7" path="res://Audio/chapter3.wav" id="4_wj0gj"]
-[ext_resource type="Texture2D" uid="uid://djy6ar0d6pdmg" path="res://Art/peppers/1545375e91fcf31866b3eac172b23a13.png" id="5_1xnum"]
+[ext_resource type="Texture2D" uid="uid://u6kpwx0b4fg1" path="res://Art/peppers/cili.png" id="4_k74xk"]
+[ext_resource type="Texture2D" uid="uid://yq7w5u4tu6dk" path="res://Art/plant/plant gradient.tres" id="5_uvgr8"]
 [ext_resource type="Shader" uid="uid://m50r2wdn2lgp" path="res://Art/moss/moss shader.tres" id="6_dfubi"]
 [ext_resource type="Texture2D" uid="uid://we1jebwek778" path="res://Art/Root/root_joint_graphics_GRADIENT.tres" id="7_am854"]
 [ext_resource type="Texture2D" uid="uid://rkhlx0p17ulj" path="res://Art/moss/mossb1.png" id="8_mnkdb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_otdbv"]
+shader = ExtResource("2_tfcot")
+shader_parameter/AlphaClip = 0.1
+shader_parameter/GradientMap = ExtResource("3_wonyy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eq4ay"]
+shader = ExtResource("2_tfcot")
+shader_parameter/AlphaClip = 0.098
+shader_parameter/GradientMap = ExtResource("5_uvgr8")
 
 [sub_resource type="Animation" id="Animation_1crdn"]
 length = 0.001
@@ -61,31 +71,36 @@ sprite1 = NodePath("Plant2")
 sprite2 = NodePath("Plant3")
 sprite3 = NodePath("Plant4")
 chilli = NodePath("Chilli")
-audio = Array[AudioStream]([ExtResource("2_pag4g"), ExtResource("3_2fy5y"), ExtResource("4_wj0gj")])
 audioPlayer = NodePath("AudioStreamPlayer2D")
 
 [node name="Chilli" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_otdbv")
 position = Vector2(-90, -141)
 rotation = 0.855849
 scale = Vector2(0.73107, 0.7362)
-texture = ExtResource("5_1xnum")
+texture = ExtResource("4_k74xk")
 
 [node name="Plant1" type="Sprite2D" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_eq4ay")
 position = Vector2(-7, -47)
 texture = ExtResource("2_8agc5")
 
 [node name="Plant2" type="Sprite2D" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_eq4ay")
 position = Vector2(-13, -90)
 texture = ExtResource("3_20ri0")
 
 [node name="Plant3" type="Sprite2D" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_eq4ay")
 position = Vector2(-12, -149)
 texture = ExtResource("4_4hf5n")
 
 [node name="Plant4" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_eq4ay")
 position = Vector2(-12, -212)
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("4_4hf5n")
