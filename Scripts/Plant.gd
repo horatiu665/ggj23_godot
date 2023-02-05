@@ -7,6 +7,9 @@ class_name Plant
 @export var sprite2:Sprite2D
 @export var sprite3:Sprite2D
 @export var chilli:Sprite2D
+@export var audio:Array[AudioStream]
+@export var audioPlayer:AudioStreamPlayer2D
+@export var shakeDur:float = 3
 
 var animPlayer = $AnimationPlayer
 
@@ -15,6 +18,8 @@ var currentSprite:Sprite2D
 var sprites:Array[Sprite2D]
 
 var shakeTime:float = -1
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,6 +38,8 @@ func _ready():
 	pass # Replace with function body.
 
 
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
@@ -41,7 +48,7 @@ func _process(delta):
 		shakeTime += delta
 		rotation = 0.1*sin(shakeTime*shakeTime*10)
 	
-		if shakeTime > 3:
+		if shakeTime > shakeDur:
 			next_level_internal()
 			shakeTime = -1
 	
@@ -50,20 +57,28 @@ func _process(delta):
 func is_upgrading() -> bool:
 	return shakeTime != -1
 	
+func shake_fraction() -> float:
+	if shakeTime == -1:
+		return 0
+	return shakeTime/shakeDur	
+	
 func next_level():
 	
-	if level == sprites.size() + 1:
+	if level == 3:
 		return
 		
 	if shakeTime != -1:
 		return
+		
+	audioPlayer.stream = audio[level-1]
+	audioPlayer.play()
 		
 	shakeTime = 0
 		
 		
 func next_level_internal():
 		
-	
+
 	
 	if animPlayer:
 		animPlayer.play("shake")

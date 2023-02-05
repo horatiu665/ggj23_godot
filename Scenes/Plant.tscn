@@ -1,9 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhf50s12lpqxn"]
+[gd_scene load_steps=16 format=3 uid="uid://bhf50s12lpqxn"]
 
 [ext_resource type="Script" path="res://Scripts/Plant.gd" id="1_3g6m2"]
 [ext_resource type="Texture2D" uid="uid://d225lqlc0s5uh" path="res://Art/plant/plant1.png" id="2_8agc5"]
+[ext_resource type="AudioStream" uid="uid://kwr673b1txo6" path="res://Audio/chapter1.wav" id="2_pag4g"]
+[ext_resource type="AudioStream" uid="uid://dnimkwlvff6jl" path="res://Audio/chapter2.wav" id="3_2fy5y"]
 [ext_resource type="Texture2D" uid="uid://b4atvpsdhehdx" path="res://Art/plant/plant2.png" id="3_20ri0"]
 [ext_resource type="Texture2D" uid="uid://cqxib1kvpi2o1" path="res://Art/plant/plant3.png" id="4_4hf5n"]
+[ext_resource type="AudioStream" uid="uid://ddt2jmi35tuv7" path="res://Audio/chapter3.wav" id="4_wj0gj"]
 [ext_resource type="Texture2D" uid="uid://djy6ar0d6pdmg" path="res://Art/peppers/1545375e91fcf31866b3eac172b23a13.png" id="5_1xnum"]
 [ext_resource type="Shader" uid="uid://m50r2wdn2lgp" path="res://Art/moss/moss shader.tres" id="6_dfubi"]
 [ext_resource type="Texture2D" uid="uid://we1jebwek778" path="res://Art/Root/root_joint_graphics_GRADIENT.tres" id="7_am854"]
@@ -51,13 +54,15 @@ shader = ExtResource("6_dfubi")
 shader_parameter/AlphaClip = 0.436
 shader_parameter/GradientMap = ExtResource("7_am854")
 
-[node name="Plant" type="Node2D" node_paths=PackedStringArray("sprite0", "sprite1", "sprite2", "sprite3", "chilli")]
+[node name="Plant" type="Node2D" node_paths=PackedStringArray("sprite0", "sprite1", "sprite2", "sprite3", "chilli", "audioPlayer")]
 script = ExtResource("1_3g6m2")
 sprite0 = NodePath("Plant1")
 sprite1 = NodePath("Plant2")
 sprite2 = NodePath("Plant3")
 sprite3 = NodePath("Plant4")
 chilli = NodePath("Chilli")
+audio = Array[AudioStream]([ExtResource("2_pag4g"), ExtResource("3_2fy5y"), ExtResource("4_wj0gj")])
+audioPlayer = NodePath("AudioStreamPlayer2D")
 
 [node name="Chilli" type="Sprite2D" parent="."]
 position = Vector2(-90, -141)
@@ -97,3 +102,5 @@ position = Vector2(-2, 23)
 rotation = -1.74989
 scale = Vector2(3, 3)
 texture = ExtResource("8_mnkdb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
