@@ -12,7 +12,9 @@ class_name Seed
 @export var waterLabel:RichTextLabel
 @export var pickupsNode:Node
 @export var levelUpThreshold:float = 500
+
 @export var plant:Plant 
+@export var waterMeter:TextureRect
 
 var pathScene = load("res://Scenes/Path.tscn")
 var jointScene = load("res://Scenes/Joint.tscn")
@@ -34,6 +36,8 @@ var pathZIndex:int = 100
 var joints:Array[Joint]
 
 var water:float = 0
+
+var substractWater:float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,7 +65,27 @@ func _process(delta:float):
 	
 	
 	if plant.is_upgrading():
+		
+		var deltaWater = delta*200
+		
+		substractWater -= deltaWater
+		
+		if substractWater > 0:
+			water -= deltaWater
+	
+	
+	var fillFraction = clamp(water/levelUpThreshold,0,1)
+	waterLabel.text = str(water as int)
+	var shaderMat = waterMeter.material as ShaderMaterial
+	shaderMat.set_shader_parameter("Fill01",fillFraction)
+	
+	if plant.is_upgrading():
 		return
+		
+	if water > levelUpThreshold:
+		substractWater = levelUpThreshold
+		plant.next_level()
+		
 	
 	if mouseBtn && !drawingPath:
 		
@@ -166,11 +190,6 @@ func _process(delta:float):
 					
 		
 
-	waterLabel.text = str(water as int)
-	
-	if water > levelUpThreshold:
-		water -= levelUpThreshold
-		plant.next_level()
 	
 	
 func update_growing(delta:float):
