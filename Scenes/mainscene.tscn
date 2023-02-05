@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cpoqg5x1nkdr8"]
+[gd_scene load_steps=25 format=3 uid="uid://cpoqg5x1nkdr8"]
 
 [ext_resource type="Script" path="res://Scripts/seed.gd" id="1_gc6re"]
 [ext_resource type="PackedScene" uid="uid://c458imdbcbtho" path="res://Scenes/Water.tscn" id="4_a25cb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://cqx08qwusatfs" path="res://Art/GROUND/ground shader.tres" id="5_eyhnw"]
 [ext_resource type="Texture2D" uid="uid://df13l45dkifhh" path="res://Art/GROUND/grounddddd.png" id="6_jpuuo"]
 [ext_resource type="Texture2D" uid="uid://l5m6ye6m8evq" path="res://Art/GROUND/ground gradient2.tres" id="7_hsjui"]
+[ext_resource type="Texture2D" uid="uid://ctq4q6q57wonb" path="res://Art/water meter/sphere (1).png" id="8_6jii3"]
 [ext_resource type="PackedScene" uid="uid://dtfgj07hbg3f4" path="res://Scenes/Rock3.tscn" id="8_7mxb3"]
 [ext_resource type="PackedScene" uid="uid://cdu85iemseh1q" path="res://Scenes/Rock2.tscn" id="8_tdb00"]
 [ext_resource type="PackedScene" uid="uid://dgsb6hqxilumm" path="res://Scenes/Rock4.tscn" id="9_8juut"]
@@ -18,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://ddt2jmi35tuv7" path="res://Audio/chapter3.wav" id="15_ufn70"]
 [ext_resource type="PackedScene" uid="uid://nw4koigbnpnw" path="res://Scenes/Seed.tscn" id="18_0v7yh"]
 [ext_resource type="PackedScene" uid="uid://bhf50s12lpqxn" path="res://Scenes/Plant.tscn" id="18_rww4f"]
+[ext_resource type="Material" uid="uid://dfymclah4c56k" path="res://Art/water meter/water meter_material.tres" id="19_ahjug"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ur6oc"]
 shader = ExtResource("5_eyhnw")
@@ -33,25 +35,24 @@ size = Vector3(1200, 1200, 10)
 
 [node name="mainscene" type="Node2D"]
 
-[node name="background (Ground)" type="TextureRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_ur6oc")
-offset_left = -2525.0
-offset_top = 359.0
-offset_right = 5087.0
-offset_bottom = 5774.0
-texture = ExtResource("6_jpuuo")
-
 [node name="background (painting)2" type="TextureRect" parent="."]
 texture_repeat = 3
-offset_left = -2476.0
-offset_top = -488.0
-offset_right = 3710.0
-offset_bottom = 2845.0
+offset_left = -2482.0
+offset_top = -505.0
+offset_right = 3704.0
+offset_bottom = 2828.0
 scale = Vector2(1.214, 1.214)
 texture = ExtResource("4_su08x")
 expand_mode = 2
 stretch_mode = 1
+
+[node name="background (Ground)" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ur6oc")
+offset_left = -2520.0
+offset_top = 392.0
+offset_right = 5092.0
+offset_bottom = 5807.0
+texture = ExtResource("6_jpuuo")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 visible = false
@@ -61,12 +62,12 @@ mesh = SubResource("BoxMesh_pjg5b")
 texture = SubResource("PlaceholderTexture2D_ueldc")
 
 [node name="InputPath" type="Line2D" parent="."]
-z_index = 100
+z_index = 1
 material = SubResource("CanvasItemMaterial_mwpdo")
 points = PackedVector2Array(0, 0, 100, 100, 200, 300)
 joint_mode = 1
 
-[node name="Roots" type="Node2D" parent="." node_paths=PackedStringArray("inputPath", "startJoint", "waterLabel", "pickupsNode", "plant")]
+[node name="Roots" type="Node2D" parent="." node_paths=PackedStringArray("inputPath", "startJoint", "waterLabel", "pickupsNode", "plant", "waterMeter")]
 rotation = 0.00192257
 script = ExtResource("1_gc6re")
 inputPath = NodePath("../InputPath")
@@ -77,10 +78,11 @@ startwater = 0.0
 startJoint = NodePath("Seed")
 waterLabel = NodePath("WaterLabel")
 pickupsNode = NodePath("../Pickups")
-levelUpThreshold = 200.0
 plant = NodePath("../Plant")
+waterMeter = NodePath("WaterMeter")
 
 [node name="WaterLabel" type="RichTextLabel" parent="Roots"]
+visible = false
 offset_left = 15.0
 offset_top = -10.0
 offset_right = 498.0
@@ -108,6 +110,15 @@ text = "Water Cheat"
 [node name="Seed" parent="Roots" instance=ExtResource("18_0v7yh")]
 position = Vector2(1325.84, 433.452)
 rotation = -0.00192257
+
+[node name="WaterMeter" type="TextureRect" parent="Roots"]
+material = ExtResource("19_ahjug")
+offset_left = 455.072
+offset_top = 37.1252
+offset_right = 755.072
+offset_bottom = 337.125
+texture = ExtResource("8_6jii3")
+expand_mode = 2
 
 [node name="Rocks" type="Node" parent="."]
 

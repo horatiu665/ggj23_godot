@@ -13,6 +13,7 @@ class_name Seed
 @export var pickupsNode:Node
 @export var levelUpThreshold:float = 500
 @export var plant:Plant 
+@export var waterMeter:TextureRect
 
 var pathScene = load("res://Scenes/Path.tscn")
 var jointScene = load("res://Scenes/Joint.tscn")
@@ -165,8 +166,11 @@ func _process(delta:float):
 					pickup.absorb(self,endPoint)
 					
 		
+	var fillFraction = water/levelUpThreshold
 
 	waterLabel.text = str(water as int)
+	var shaderMat = waterMeter.material as ShaderMaterial
+	shaderMat.set_shader_parameter("Fill01",fillFraction)
 	
 	if water > levelUpThreshold:
 		water -= levelUpThreshold
