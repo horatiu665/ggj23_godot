@@ -8,6 +8,7 @@ class_name Joint
 
 @onready var animation_player = $AnimationPlayer
 
+var parentPath:Path
 var paths:Array[Path]
 
 # Called when the node enters the scene tree for the first time.

@@ -71,6 +71,7 @@ inputPath = NodePath("../InputPath")
 growSpeed = 200.0
 jointDist = 20000.0
 jointDropFraction = 1.1
+startwater = 0.0
 startJoint = NodePath("Seed")
 waterLabel = NodePath("WaterLabel")
 pickupsNode = NodePath("../Pickups")

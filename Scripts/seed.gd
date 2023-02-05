@@ -32,7 +32,7 @@ var pathZIndex:int = 9999
 
 var joints:Array[Joint]
 
-var water:float = 1000
+var water:float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,13 +58,16 @@ func _process(delta:float):
 	
 	var mouseBtn = Input.is_action_pressed("mouse_down");
 	
-	if mouseBtn && !drawingPath && water > 0:
+	if mouseBtn && !drawingPath:
 		
 		# Find joint closts to mouse pos that is inside raidus (if any)
 		var joint:Joint
 		var startPoint:Vector2
 		var startPointFound:bool
 		var minDist:float = 9999
+		var startPath:Path
+		
+		# search joints
 		for j in joints:
 			
 			var dist = j.position.distance_to(mousePos)
@@ -73,28 +76,31 @@ func _process(delta:float):
 				startPointFound = true
 				startPoint = j.position
 				joint = j
-			
-			
-			for path in j.paths:
-				for p in path.points:
-					
-					dist = p.distance_to(mousePos)
-					if dist < 50 && dist < minDist:
-						minDist = dist
-						startPointFound = true
-						startPoint = p
+				break
+				
+		# srearch paths
+		if joint == null:
+			for j in joints:
+				for path in j.paths:
+					for p in path.points:
+						
+						var dist = p.distance_to(mousePos)
+						if dist < 50 && dist < minDist:
+							minDist = dist
+							startPointFound = true
+							startPoint = p
+							startPath = path
 						
 			
 		
 		if startPointFound:
 			
-			
-			
 			# if not joint found craate one
-			if joint != startJoint:
-				joint = jointScene.instantiate()
+			if joint == null:
+				joint = jointScene.instantiate() as Joint
 				add_child(joint)
 				joint.position = startPoint
+				joint.parentPath = startPath
 				joint.radius = 200
 				joints.append(joint)
 			
@@ -162,10 +168,10 @@ func update_growing(delta:float):
 	var deltaLength = growSpeed*delta
 	
 	# cant grow without water
-	water -= deltaLength
-	if water < 0:
-		water = 0
-		return
+#	water -= deltaLength
+#	if water < 0:
+#		water = 0
+#		return
 	
 	growingRootLenght += deltaLength
 	
@@ -229,6 +235,7 @@ func update_growing(delta:float):
 #		growingSectionLength = 0
 #		jointDistAccumulator = jointDistAccumulator - jointDist
 
+	growingRoot.increase_width(delta)
 
 	# Detect next segment
 	growingSectionLength += deltaLength
