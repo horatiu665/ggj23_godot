@@ -82,8 +82,10 @@ func _process(delta:float):
 	if plant.is_upgrading():
 		return
 		
-	if water > levelUpThreshold:
+	if water >= levelUpThreshold:
 		substractWater = levelUpThreshold
+		growingRoot = null
+		drawingPath = false
 		plant.next_level()
 		
 	
@@ -181,6 +183,10 @@ func _process(delta:float):
 			for child in pickupsNode.get_children():
 				
 				var pickup = child as Pickup
+				
+				if pickup == null:
+					continue
+				
 				if pickup.isAbsorbing:
 					continue
 				

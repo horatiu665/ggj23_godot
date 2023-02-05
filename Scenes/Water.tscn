@@ -18,7 +18,7 @@ shader_parameter/GradientMap = ExtResource("3_fc4yg")
 
 [node name="Water" type="Node2D" node_paths=PackedStringArray("sprite", "audioPlayer")]
 script = ExtResource("1_nofml")
-startWater = 200.0
+startWater = 100.0
 absorbSpeed = 500.0
 spriteSizeFactor = 0.02
 sprite = NodePath("Icon")
