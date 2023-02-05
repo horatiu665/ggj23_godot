@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://dfymclah4c56k"]
+
+[ext_resource type="Shader" uid="uid://dfajp1u6d3rg2" path="res://Art/water meter/water meter.tres" id="1_1td0r"]
+[ext_resource type="Texture2D" uid="uid://dpavi3jqnysn0" path="res://Art/water meter/water meter gradient.tres" id="2_djtww"]
+[ext_resource type="Texture2D" uid="uid://8tjyslme8fsp" path="res://Art/Root/noise.png" id="3_j0s3x"]
+
+[sub_resource type="Gradient" id="Gradient_5hdyd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.2589, 0.38835, 0.521036)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kglou"]
+gradient = SubResource("Gradient_5hdyd")
+
+[sub_resource type="Gradient" id="Gradient_pdjy2"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.0841424)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_niwil"]
+gradient = SubResource("Gradient_pdjy2")
+
+[resource]
+shader = ExtResource("1_1td0r")
+shader_parameter/Fill01 = 0.636
+shader_parameter/wobbleTimeSpeed = 7.626
+shader_parameter/WobbleHeight = 0.008
+shader_parameter/WaterScrollSpeed = Vector2(0.2, 0.586)
+shader_parameter/WaterGradAmount = Vector2(0.494, 0.656)
+shader_parameter/waterlevelborder = SubResource("GradientTexture1D_niwil")
+shader_parameter/water_noise = ExtResource("3_j0s3x")
+shader_parameter/circleedge = SubResource("GradientTexture1D_kglou")
+shader_parameter/GradientMap = ExtResource("2_djtww")

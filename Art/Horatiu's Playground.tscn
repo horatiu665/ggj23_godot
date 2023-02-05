@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bbg78dbdyaxj4"]
+[gd_scene load_steps=29 format=3 uid="uid://bbg78dbdyaxj4"]
 
 [ext_resource type="Shader" uid="uid://cqx08qwusatfs" path="res://Art/GROUND/ground shader.tres" id="1_fwgbb"]
 [ext_resource type="Texture2D" uid="uid://df13l45dkifhh" path="res://Art/GROUND/grounddddd.png" id="2_hg8mp"]
@@ -20,6 +20,8 @@
 [ext_resource type="Script" path="res://Horatiu/MossSpawner.gd" id="14_mhn4t"]
 [ext_resource type="PackedScene" uid="uid://cl77pla1q3h74" path="res://Scenes/Path.tscn" id="15_2i21q"]
 [ext_resource type="PackedScene" uid="uid://jy7ksr2asypk" path="res://Art/Root/root_joint_graphics.tscn" id="16_py3m8"]
+[ext_resource type="Material" uid="uid://dfymclah4c56k" path="res://Art/water meter/water meter_material.tres" id="21_hatrw"]
+[ext_resource type="Texture2D" uid="uid://cxr5a83knbxey" path="res://Art/water meter/sphere.png" id="22_y6jiu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iblmn"]
 shader = ExtResource("1_fwgbb")
@@ -121,7 +123,7 @@ stretch_mode = 6
 material = SubResource("5")
 position = Vector2(-48, -7)
 scale = Vector2(0.324502, 0.420812)
-points = PackedVector2Array(890.718, 112.739, 992.29, 175.85, 1060.09, 287.539, 1066.25, 306.55, 1067.95, 324.236, 1069.63, 341.741, 1069.33, 358.83, 1072.41, 370.712, 1081.66, 392.099, 1087.82, 408.734, 1090.9, 422.992, 1102.18, 436.04, 1112.47, 453.884, 1127.88, 463.39, 1144.56, 474.767, 1161.78, 482.401, 1171.03, 496.659, 1189.52, 506.164, 1208, 518.046, 1229.58, 525.175, 1251.15, 525.175, 1334.35, 539.433, 1423.72, 572.702, 1445.29, 651.122, 1488.43, 724.789, 1577.8, 853.113, 1596.29, 974.307, 1624.03, 1033.72, 1608.62, 1090.75, 1559.31, 1178.67, 1488.43, 1181.05, 1352.84, 1162.04, 1340.52, 1124.02, 1322.03, 1050.35)
+points = PackedVector2Array(890.718, 112.739, 992.29, 175.85, 1060.09, 287.539, 1066.25, 306.55, 1067.95, 324.236, 1069.63, 341.741, 1069.33, 358.83, 1072.41, 370.712, 1081.66, 392.099, 1087.82, 408.734, 1090.9, 422.992, 1102.18, 436.04, 1112.47, 453.884, 1127.88, 463.39, 1144.56, 474.767, 1161.78, 482.401, 1171.03, 496.659, 1189.52, 506.164, 1208, 518.046, 1229.58, 525.175, 1251.15, 525.175, 1352.84, 556.068, 1423.72, 572.702, 1445.29, 651.122, 1488.43, 724.789, 1577.8, 853.113, 1596.29, 974.307, 1624.03, 1033.72, 1608.62, 1090.75, 1559.31, 1178.67, 1488.43, 1181.05, 1352.84, 1162.04, 1340.52, 1124.02, 1322.03, 1050.35)
 width = 80.0
 width_curve = SubResource("6")
 texture = ExtResource("11_kwkye")
@@ -145,3 +147,12 @@ autostart = true
 position = Vector2(629, 355)
 
 [node name="ROOT JOINT GRAPHICS" parent="." instance=ExtResource("16_py3m8")]
+
+[node name="water meter" type="TextureRect" parent="."]
+material = ExtResource("21_hatrw")
+offset_left = 61.0
+offset_top = -325.0
+offset_right = 361.0
+offset_bottom = -25.0
+texture = ExtResource("22_y6jiu")
+expand_mode = 2
