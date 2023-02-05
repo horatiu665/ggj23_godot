@@ -1,15 +1,18 @@
-[gd_scene load_steps=24 format=3 uid="uid://bbg78dbdyaxj4"]
+[gd_scene load_steps=27 format=3 uid="uid://bbg78dbdyaxj4"]
 
 [ext_resource type="Shader" uid="uid://cqx08qwusatfs" path="res://Art/GROUND/ground shader.tres" id="1_fwgbb"]
 [ext_resource type="Texture2D" uid="uid://df13l45dkifhh" path="res://Art/GROUND/grounddddd.png" id="2_hg8mp"]
 [ext_resource type="Texture2D" uid="uid://l5m6ye6m8evq" path="res://Art/GROUND/ground gradient2.tres" id="3_fc0co"]
-[ext_resource type="Shader" uid="uid://m50r2wdn2lgp" path="res://Art/moss/moss shader.tres" id="4_oy31e"]
+[ext_resource type="Shader" uid="uid://871x4pydq2oq" path="res://Art/plant/plant shader.tres" id="4_ceq5x"]
 [ext_resource type="Texture2D" uid="uid://d0lclhe8amkm1" path="res://Art/moss/mossb2.png" id="5_dsct7"]
-[ext_resource type="Texture2D" uid="uid://c13dnev7fgyu3" path="res://Art/moss/moss gradient stone.tres" id="5_rsam4"]
+[ext_resource type="Texture2D" uid="uid://yq7w5u4tu6dk" path="res://Art/plant/plant gradient.tres" id="5_lwkug"]
 [ext_resource type="Texture2D" uid="uid://bw3atheuvu7uj" path="res://Art/other stuff/rocko6.png" id="6_5euai"]
+[ext_resource type="Texture2D" uid="uid://d225lqlc0s5uh" path="res://Art/plant/plant1.png" id="7_bg2w7"]
 [ext_resource type="Texture2D" uid="uid://rrx272cipol7" path="res://Art/moss/mossb4.png" id="7_m74q0"]
 [ext_resource type="Shader" uid="uid://4wags6gut1qh" path="res://Art/Root/root shader hhh.tres" id="8_qr118"]
+[ext_resource type="Texture2D" uid="uid://b4atvpsdhehdx" path="res://Art/plant/plant2.png" id="8_sojor"]
 [ext_resource type="Texture2D" uid="uid://dbk772pmd1y6l" path="res://Art/Root/root gradient.tres" id="9_q5y6a"]
+[ext_resource type="Texture2D" uid="uid://cqxib1kvpi2o1" path="res://Art/plant/plant3.png" id="9_r40pp"]
 [ext_resource type="Texture2D" uid="uid://r0bfy2eau7ys" path="res://Art/Root/carrot3.jpg" id="10_cjicq"]
 [ext_resource type="Texture2D" uid="uid://8tjyslme8fsp" path="res://Art/Root/noise.png" id="11_kwkye"]
 [ext_resource type="Script" path="res://Art/Root/hhhLine2D.gd" id="12_i7jtv"]
@@ -24,9 +27,9 @@ shader_parameter/Earthy = ExtResource("2_hg8mp")
 shader_parameter/GradientMap = ExtResource("3_fc0co")
 
 [sub_resource type="ShaderMaterial" id="16"]
-shader = ExtResource("4_oy31e")
-shader_parameter/AlphaClip = 0.002
-shader_parameter/GradientMap = ExtResource("5_rsam4")
+shader = ExtResource("4_ceq5x")
+shader_parameter/AlphaClip = 0.716
+shader_parameter/GradientMap = ExtResource("5_lwkug")
 
 [sub_resource type="ShaderMaterial" id="5"]
 shader = ExtResource("8_qr118")
@@ -68,6 +71,33 @@ offset_right = 993.0
 offset_bottom = 454.0
 texture = ExtResource("5_dsct7")
 stretch_mode = 6
+
+[node name="plant1" type="TextureRect" parent="."]
+material = SubResource("16")
+offset_left = 569.0
+offset_top = -231.0
+offset_right = 689.0
+offset_bottom = -5.0
+texture = ExtResource("7_bg2w7")
+stretch_mode = 5
+
+[node name="plant2" type="TextureRect" parent="."]
+material = SubResource("16")
+offset_left = 712.0
+offset_top = -375.0
+offset_right = 938.0
+offset_bottom = 21.0
+texture = ExtResource("8_sojor")
+stretch_mode = 5
+
+[node name="plant3" type="TextureRect" parent="."]
+material = SubResource("16")
+offset_left = 917.0
+offset_top = -543.0
+offset_right = 1320.0
+offset_bottom = 64.0
+texture = ExtResource("9_r40pp")
+stretch_mode = 5
 
 [node name="mossz3" type="TextureRect" parent="."]
 material = SubResource("16")

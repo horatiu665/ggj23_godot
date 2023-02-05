@@ -1,0 +1,118 @@
+[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://871x4pydq2oq"]
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_2ti7k"]
+default_input_values = [0, 0.0, 1, 0.03, 2, 2.08165e-12]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_eqff4"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_gkhc6"]
+input_name = "screen_uv"
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_rlpg0"]
+default_input_values = [0, 0.0, 1, 2.08165e-12, 2, 0.0]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7fgy0"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_0lq80"]
+default_input_values = [0, 0.0, 1, 0.1, 2, 1e-05]
+function = 2
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_u06qb"]
+parameter_name = "AlphaClip"
+default_value_enabled = true
+default_value = 0.1
+
+[sub_resource type="VisualShaderNodeInput" id="9"]
+input_name = "texture"
+
+[sub_resource type="VisualShaderNodeTexture" id="10"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="11"]
+parameter_name = "GradientMap"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ygdhb"]
+source = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_3e4qg"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_iqae7"]
+function = 0
+
+[resource]
+code = "shader_type canvas_item;
+uniform sampler2D GradientMap;
+uniform float AlphaClip = 0.10000000149012;
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(TEXTURE, UV);
+
+
+// VectorOp:11
+	vec3 n_in11p1 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_out11p0 = vec3(n_out3p0.xyz) + n_in11p1;
+
+
+	vec4 n_out7p0;
+// Texture2D:7
+	n_out7p0 = texture(GradientMap, vec2(n_out11p0.xy));
+
+
+// Input:15
+	vec4 n_out15p0 = COLOR;
+	float n_out15p4 = n_out15p0.a;
+
+
+// FloatParameter:17
+	float n_out17p0 = AlphaClip;
+
+
+// Compare:16
+	bool n_out16p0 = n_out15p4 > n_out17p0;
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out7p0.xyz);
+	COLOR.a = (n_out16p0 ? 1.0 : 0.0);
+
+
+}
+"
+graph_offset = Vector2(-500.494, -50.3102)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(120, 340)
+nodes/fragment/2/node = SubResource("9")
+nodes/fragment/2/position = Vector2(-2580, 960)
+nodes/fragment/3/node = SubResource("10")
+nodes/fragment/3/position = Vector2(-1880, 820)
+nodes/fragment/4/node = SubResource("11")
+nodes/fragment/4/position = Vector2(-1680, -220)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture_ygdhb")
+nodes/fragment/7/position = Vector2(-780, 200)
+nodes/fragment/8/node = SubResource("VisualShaderNodeInput_3e4qg")
+nodes/fragment/8/position = Vector2(-3440, 420)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatFunc_iqae7")
+nodes/fragment/9/position = Vector2(-2500, 460)
+nodes/fragment/10/node = SubResource("VisualShaderNodeMultiplyAdd_2ti7k")
+nodes/fragment/10/position = Vector2(-2120, 380)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorOp_eqff4")
+nodes/fragment/11/position = Vector2(-1220, 560)
+nodes/fragment/12/node = SubResource("VisualShaderNodeInput_gkhc6")
+nodes/fragment/12/position = Vector2(-3480, 220)
+nodes/fragment/14/node = SubResource("VisualShaderNodeMultiplyAdd_rlpg0")
+nodes/fragment/14/position = Vector2(-2820, 260)
+nodes/fragment/15/node = SubResource("VisualShaderNodeInput_7fgy0")
+nodes/fragment/15/position = Vector2(-1420, 1220)
+nodes/fragment/16/node = SubResource("VisualShaderNodeCompare_0lq80")
+nodes/fragment/16/position = Vector2(-620, 1380)
+nodes/fragment/17/node = SubResource("VisualShaderNodeFloatParameter_u06qb")
+nodes/fragment/17/position = Vector2(-1340, 1600)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 7, 2, 7, 0, 0, 0, 9, 0, 10, 0, 3, 0, 11, 0, 11, 0, 7, 0, 12, 0, 14, 0, 14, 0, 9, 0, 15, 4, 16, 0, 16, 0, 0, 1, 17, 0, 16, 1)
