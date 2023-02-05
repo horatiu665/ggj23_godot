@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bbg78dbdyaxj4"]
+[gd_scene load_steps=37 format=3 uid="uid://bbg78dbdyaxj4"]
 
 [ext_resource type="Shader" uid="uid://cqx08qwusatfs" path="res://Art/GROUND/ground shader.tres" id="1_fwgbb"]
 [ext_resource type="Texture2D" uid="uid://df13l45dkifhh" path="res://Art/GROUND/grounddddd.png" id="2_hg8mp"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://871x4pydq2oq" path="res://Art/plant/plant shader.tres" id="4_ceq5x"]
 [ext_resource type="Texture2D" uid="uid://d0lclhe8amkm1" path="res://Art/moss/mossb2.png" id="5_dsct7"]
 [ext_resource type="Texture2D" uid="uid://yq7w5u4tu6dk" path="res://Art/plant/plant gradient.tres" id="5_lwkug"]
+[ext_resource type="Texture2D" uid="uid://bbsx2tnuguivp" path="res://Art/moss/moss gradient water.tres" id="5_yeys1"]
 [ext_resource type="Texture2D" uid="uid://bw3atheuvu7uj" path="res://Art/other stuff/rocko6.png" id="6_5euai"]
 [ext_resource type="Texture2D" uid="uid://d225lqlc0s5uh" path="res://Art/plant/plant1.png" id="7_bg2w7"]
 [ext_resource type="Texture2D" uid="uid://rrx272cipol7" path="res://Art/moss/mossb4.png" id="7_m74q0"]
@@ -14,11 +15,15 @@
 [ext_resource type="Texture2D" uid="uid://dbk772pmd1y6l" path="res://Art/Root/root gradient.tres" id="9_q5y6a"]
 [ext_resource type="Texture2D" uid="uid://cqxib1kvpi2o1" path="res://Art/plant/plant3.png" id="9_r40pp"]
 [ext_resource type="Texture2D" uid="uid://r0bfy2eau7ys" path="res://Art/Root/carrot3.jpg" id="10_cjicq"]
+[ext_resource type="Shader" uid="uid://m50r2wdn2lgp" path="res://Art/moss/moss shader.tres" id="10_qr35j"]
+[ext_resource type="Texture2D" uid="uid://c13dnev7fgyu3" path="res://Art/moss/moss gradient stone.tres" id="11_0i6md"]
 [ext_resource type="Texture2D" uid="uid://8tjyslme8fsp" path="res://Art/Root/noise.png" id="11_kwkye"]
 [ext_resource type="Script" path="res://Art/Root/hhhLine2D.gd" id="12_i7jtv"]
+[ext_resource type="Shader" uid="uid://cnlqckbhe6ek2" path="res://Art/moss/moss shader WITH TIME.tres" id="13_7sp8i"]
 [ext_resource type="Texture2D" uid="uid://rkhlx0p17ulj" path="res://Art/moss/mossb1.png" id="13_ii6vt"]
 [ext_resource type="Script" path="res://Horatiu/MossSpawner.gd" id="14_mhn4t"]
 [ext_resource type="PackedScene" uid="uid://cl77pla1q3h74" path="res://Scenes/Path.tscn" id="15_2i21q"]
+[ext_resource type="Texture2D" uid="uid://dohm2lodwka4g" path="res://Art/moss/moss gradient RED.tres" id="15_047k3"]
 [ext_resource type="PackedScene" uid="uid://jy7ksr2asypk" path="res://Art/Root/root_joint_graphics.tscn" id="16_py3m8"]
 [ext_resource type="Material" uid="uid://dfymclah4c56k" path="res://Art/water meter/water meter_material.tres" id="21_hatrw"]
 [ext_resource type="Texture2D" uid="uid://ctq4q6q57wonb" path="res://Art/water meter/sphere (1).png" id="22_ybpfg"]
@@ -28,10 +33,25 @@ shader = ExtResource("1_fwgbb")
 shader_parameter/Earthy = ExtResource("2_hg8mp")
 shader_parameter/GradientMap = ExtResource("3_fc0co")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1i0d4"]
+shader = ExtResource("13_7sp8i")
+shader_parameter/AlphaClip = 0.318
+shader_parameter/GradientMap = ExtResource("5_yeys1")
+
 [sub_resource type="ShaderMaterial" id="16"]
 shader = ExtResource("4_ceq5x")
 shader_parameter/AlphaClip = 0.716
 shader_parameter/GradientMap = ExtResource("5_lwkug")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85i7s"]
+shader = ExtResource("10_qr35j")
+shader_parameter/AlphaClip = 0.036
+shader_parameter/GradientMap = ExtResource("11_0i6md")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1d4lj"]
+shader = ExtResource("13_7sp8i")
+shader_parameter/AlphaClip = 0.302
+shader_parameter/GradientMap = ExtResource("15_047k3")
 
 [sub_resource type="ShaderMaterial" id="5"]
 shader = ExtResource("8_qr118")
@@ -66,7 +86,7 @@ offset_bottom = 1312.0
 texture = ExtResource("2_hg8mp")
 
 [node name="mossz2" type="TextureRect" parent="."]
-material = SubResource("16")
+material = SubResource("ShaderMaterial_1i0d4")
 offset_left = 900.0
 offset_top = 325.0
 offset_right = 993.0
@@ -101,8 +121,8 @@ offset_bottom = 64.0
 texture = ExtResource("9_r40pp")
 stretch_mode = 5
 
-[node name="mossz3" type="TextureRect" parent="."]
-material = SubResource("16")
+[node name="rokk" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_85i7s")
 offset_left = 1108.0
 offset_top = 102.0
 offset_right = 1702.0
@@ -111,7 +131,7 @@ texture = ExtResource("6_5euai")
 stretch_mode = 6
 
 [node name="mossz4" type="TextureRect" parent="."]
-material = SubResource("16")
+material = SubResource("ShaderMaterial_1d4lj")
 offset_left = 799.0
 offset_top = 188.0
 offset_right = 892.0
