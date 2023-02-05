@@ -75,6 +75,7 @@ _data = {
 script = ExtResource("1_ykt1n")
 
 [node name="Icon" type="Sprite2D" parent="."]
+visible = false
 z_index = 100
 material = SubResource("ShaderMaterial_xih0n")
 rotation = -0.136425

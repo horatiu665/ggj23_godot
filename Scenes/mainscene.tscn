@@ -61,6 +61,7 @@ mesh = SubResource("BoxMesh_pjg5b")
 texture = SubResource("PlaceholderTexture2D_ueldc")
 
 [node name="InputPath" type="Line2D" parent="."]
+z_index = 100
 material = SubResource("CanvasItemMaterial_mwpdo")
 points = PackedVector2Array(0, 0, 100, 100, 200, 300)
 joint_mode = 1
@@ -76,6 +77,7 @@ startwater = 0.0
 startJoint = NodePath("Seed")
 waterLabel = NodePath("WaterLabel")
 pickupsNode = NodePath("../Pickups")
+levelUpThreshold = 200.0
 plant = NodePath("../Plant")
 
 [node name="WaterLabel" type="RichTextLabel" parent="Roots"]
@@ -237,7 +239,7 @@ script = ExtResource("13_lryvs")
 max_volume = 1.0
 
 [node name="Plant" parent="." instance=ExtResource("18_rww4f")]
-position = Vector2(1332, 371)
+position = Vector2(1330, 403)
 
 [connection signal="button_up" from="Roots/ResetButton" to="Roots" method="_on_reset_button_button_up"]
 [connection signal="button_up" from="Roots/WaterCheat" to="Roots" method="_on_water_cheat_button_up"]

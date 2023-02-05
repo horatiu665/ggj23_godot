@@ -4,6 +4,7 @@ class_name Path
 
 @export var minWidth:float = 60
 @export var maxWidth:float = 150
+@export var growthRate:float = 4
 
 
 
@@ -33,7 +34,9 @@ func _process(delta):
 func increase_width(delta:float):
 
 	
-	width = clamp(width + delta*0.1,minWidth,maxWidth)
+	width = clamp(width + delta*growthRate,minWidth,maxWidth)
+	
+	print("name:",name," w:", width)
 	
 	if startJoint != null:
 		if startJoint.parentPath != null:

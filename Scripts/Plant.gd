@@ -5,6 +5,8 @@ class_name Plant
 @export var sprite0:Sprite2D
 @export var sprite1:Sprite2D
 @export var sprite2:Sprite2D
+@export var sprite3:Sprite2D
+@export var chilli:Sprite2D
 
 var animPlayer = $AnimationPlayer
 
@@ -18,10 +20,13 @@ func _ready():
 	sprite0.visible = false
 	sprite1.visible = false
 	sprite2.visible = false
+	sprite3.visible = false
+	chilli.visible = false
 
 	sprites.append(sprite0)
 	sprites.append(sprite1)
 	sprites.append(sprite2)
+	sprites.append(sprite3)
 
 	pass # Replace with function body.
 
@@ -32,18 +37,23 @@ func _process(delta):
 	
 func next_level():
 	
-	if level == 3:
+	if level == sprites.size() + 1:
 		return
 	
 	if animPlayer:
 		animPlayer.play("shake")
 	
-	if currentSprite:
-		currentSprite.visible = false
+
 		
 	level += 1
 	
+	if level > sprites.size():
+		chilli.visible = true
+		return
 	
+	if currentSprite:
+		currentSprite.visible = false
+		
 	currentSprite = sprites[level - 1]
 	currentSprite.visible = true
 	

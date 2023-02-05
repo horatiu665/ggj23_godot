@@ -29,7 +29,7 @@ var growingRootLenght:float
 var growingSectionLength:float
 var jointDistAccumulator:float
 
-var pathZIndex:int = 9999
+var pathZIndex:int = 100
 
 var joints:Array[Joint]
 

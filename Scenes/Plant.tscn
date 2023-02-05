@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhf50s12lpqxn"]
+[gd_scene load_steps=13 format=3 uid="uid://bhf50s12lpqxn"]
 
 [ext_resource type="Script" path="res://Scripts/Plant.gd" id="1_3g6m2"]
 [ext_resource type="Texture2D" uid="uid://d225lqlc0s5uh" path="res://Art/plant/plant1.png" id="2_8agc5"]
 [ext_resource type="Texture2D" uid="uid://b4atvpsdhehdx" path="res://Art/plant/plant2.png" id="3_20ri0"]
 [ext_resource type="Texture2D" uid="uid://cqxib1kvpi2o1" path="res://Art/plant/plant3.png" id="4_4hf5n"]
+[ext_resource type="Texture2D" uid="uid://djy6ar0d6pdmg" path="res://Art/peppers/1545375e91fcf31866b3eac172b23a13.png" id="5_1xnum"]
+[ext_resource type="Shader" uid="uid://m50r2wdn2lgp" path="res://Art/moss/moss shader.tres" id="6_dfubi"]
+[ext_resource type="Texture2D" uid="uid://we1jebwek778" path="res://Art/Root/root_joint_graphics_GRADIENT.tres" id="7_am854"]
+[ext_resource type="Texture2D" uid="uid://rkhlx0p17ulj" path="res://Art/moss/mossb1.png" id="8_mnkdb"]
 
 [sub_resource type="Animation" id="Animation_1crdn"]
 length = 0.001
@@ -42,25 +46,54 @@ _data = {
 "shake": SubResource("Animation_1w2fg")
 }
 
-[node name="Plant" type="Node2D" node_paths=PackedStringArray("sprite0", "sprite1", "sprite2")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4epyo"]
+shader = ExtResource("6_dfubi")
+shader_parameter/AlphaClip = 0.436
+shader_parameter/GradientMap = ExtResource("7_am854")
+
+[node name="Plant" type="Node2D" node_paths=PackedStringArray("sprite0", "sprite1", "sprite2", "sprite3", "chilli")]
 script = ExtResource("1_3g6m2")
 sprite0 = NodePath("Plant1")
 sprite1 = NodePath("Plant2")
 sprite2 = NodePath("Plant3")
+sprite3 = NodePath("Plant4")
+chilli = NodePath("Chilli")
+
+[node name="Chilli" type="Sprite2D" parent="."]
+position = Vector2(-90, -141)
+rotation = 0.855849
+scale = Vector2(0.73107, 0.7362)
+texture = ExtResource("5_1xnum")
 
 [node name="Plant1" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-7, -47)
 texture = ExtResource("2_8agc5")
 
 [node name="Plant2" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-13, -90)
 texture = ExtResource("3_20ri0")
 
 [node name="Plant3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-12, -149)
+texture = ExtResource("4_4hf5n")
+
+[node name="Plant4" type="Sprite2D" parent="."]
+position = Vector2(-12, -212)
+scale = Vector2(1.4, 1.4)
 texture = ExtResource("4_4hf5n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_2uxna")
 }
+
+[node name="Icon" type="Sprite2D" parent="."]
+z_index = 100
+material = SubResource("ShaderMaterial_4epyo")
+position = Vector2(-2, 23)
+rotation = -1.74989
+scale = Vector2(3, 3)
+texture = ExtResource("8_mnkdb")
