@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 class_name Plant
 
@@ -13,6 +13,8 @@ var animPlayer = $AnimationPlayer
 var level:int = 0
 var currentSprite:Sprite2D
 var sprites:Array[Sprite2D]
+
+var shakeTime:float = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,12 +35,35 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	
+	if shakeTime != -1:
+		shakeTime += delta
+		rotation = 0.1*sin(shakeTime*shakeTime*10)
+	
+		if shakeTime > 3:
+			next_level_internal()
+			shakeTime = -1
+	
 	pass
+	
+func is_upgrading() -> bool:
+	return shakeTime != -1
 	
 func next_level():
 	
 	if level == sprites.size() + 1:
 		return
+		
+	if shakeTime != -1:
+		return
+		
+	shakeTime = 0
+		
+		
+func next_level_internal():
+		
+	
 	
 	if animPlayer:
 		animPlayer.play("shake")

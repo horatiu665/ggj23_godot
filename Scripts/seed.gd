@@ -59,6 +59,10 @@ func _process(delta:float):
 	
 	var mouseBtn = Input.is_action_pressed("mouse_down");
 	
+	
+	if plant.is_upgrading():
+		return
+	
 	if mouseBtn && !drawingPath:
 		
 		# Find joint closts to mouse pos that is inside raidus (if any)
