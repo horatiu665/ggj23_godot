@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://rkhlx0p17ulj"
-path.etc2="res://.godot/imported/mossb1.png-9b369349b45894e2588ed00daec74135.etc2.ctex"
+path.s3tc="res://.godot/imported/mossb1.png-9b369349b45894e2588ed00daec74135.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art/moss/mossb1.png"
-dest_files=["res://.godot/imported/mossb1.png-9b369349b45894e2588ed00daec74135.etc2.ctex"]
+dest_files=["res://.godot/imported/mossb1.png-9b369349b45894e2588ed00daec74135.s3tc.ctex"]
 
 [params]
 

@@ -423,7 +423,6 @@ void fragment() {
 
 // Input:24
 	vec2 n_out24p0 = UV;
-	float n_out24p1 = n_out24p0.r;
 
 
 // Distance:27
